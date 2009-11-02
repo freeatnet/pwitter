@@ -23,7 +23,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="29"/>
+			<integer value="1053"/>
 			<integer value="1239"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -606,8 +606,7 @@
 								<object class="NSMenuItem" id="537909330">
 									<reference key="NSMenu" ref="363716984"/>
 									<string key="NSTitle">Open Link in Selected Tweet</string>
-									<string key="NSKeyEquiv">l</string>
-									<int key="NSKeyEquivModMask">1572864</int>
+									<string key="NSKeyEquiv"></string>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="185476363"/>
 									<reference key="NSMixedImage" ref="628649836"/>

@@ -88,7 +88,7 @@
 - (NSArray*) tokenizeByID:(NSString*)aString {
 	
     NSCharacterSet *acceptedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:
-                                            @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"];
+                                            @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-/"];
 	
     return [self tokenize:aString 
             acceptedChars:acceptedCharacterSet
