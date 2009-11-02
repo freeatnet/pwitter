@@ -96,16 +96,43 @@
     
 }
 
+- (NSArray*) tokenizeByTag:(NSString*)aString {
+	
+    NSCharacterSet *acceptedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:
+                                            @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"];
+	
+    return [self tokenize:aString 
+            acceptedChars:acceptedCharacterSet
+                   prefix:[NSArray arrayWithObject:NTLN_URLEXTRACTOR_PREFIX_TAG]];
+    
+}
+
 - (NSArray*) tokenizeByAll:(NSString*)aString {
     NSMutableArray *back = [NSMutableArray arrayWithCapacity:100];
 	
     NSArray *tokensById = [self tokenizeByID:aString];
-    
-    int i;
-    for (i = 0; i < [tokensById count]; i++) {
-        [back addObjectsFromArray:[self tokenizeByURL:[tokensById objectAtIndex:i]]];
+	
+	int i;
+    for (i = 0; i < tokensById.count; i++) {
+		if ([self isIDToken:[tokensById objectAtIndex:i]]) {
+			[back addObject:[tokensById objectAtIndex:i]];
+			continue;
+		}
+		
+		NSArray *tokensByTag = [self tokenizeByTag:[tokensById objectAtIndex:i]];
+		int ii;
+		for (ii = 0; ii < tokensByTag.count; ii++) {
+			if ([self isTagToken:[tokensByTag objectAtIndex:ii]]){
+				[back addObject:[tokensByTag objectAtIndex:ii]];
+				continue;
+			}
+			else {
+
+				[back addObjectsFromArray:[self tokenizeByURL:[tokensByTag objectAtIndex:ii]]];
+			}
+		}
+
     }
-    
     return back;
 }
 
@@ -120,6 +147,13 @@
 
 - (BOOL) isIDToken:(NSString*)token {
     if ([token rangeOfString:NTLN_URLEXTRACTOR_PREFIX_ID].location == 0  && [token length] > [NTLN_URLEXTRACTOR_PREFIX_ID length]) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+- (BOOL) isTagToken:(NSString*)token {
+    if ([token rangeOfString:NTLN_URLEXTRACTOR_PREFIX_TAG].location == 0  && [token length] > [NTLN_URLEXTRACTOR_PREFIX_TAG length]) {
         return TRUE;
     }
     return FALSE;

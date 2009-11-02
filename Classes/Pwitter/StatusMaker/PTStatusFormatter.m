@@ -51,20 +51,30 @@
 																						 URL:lUrl 
 																				  attributes:[self defaultLinkFontAttributes]]];
 			if (!aBox.statusLink) aBox.statusLink = lUrl;
-        } else if ([lUtils isIDToken:lToken]) {
+        } else if ([lUtils isIDToken:lToken] || [lUtils isTagToken:lToken]) {
+			
 			if (aBox.sType == NormalMessage && 
 				[[lToken substringFromIndex:1] isEqualToString:[[PTPreferenceManager sharedSingleton] userName]]) {
 				aBox.entityColor = [NSColor colorWithCalibratedRed:0.3 green:0.1 blue:0.1 alpha:1.0];
 				aBox.sType = ReplyMessage;
 			}
-            [lProcessedString appendAttributedString:
-			 [NSAttributedString hyperlinkFromString:lToken
-												 URL:[NSURL URLWithString:
-													  [NSString stringWithFormat:@"http://twitter.com/%@", [lToken substringFromIndex:1]]]
-										  attributes:[self defaultLinkFontAttributes]]];
+			if ([lUtils isIDToken:lToken]){
+				[lProcessedString appendAttributedString:
+				 [NSAttributedString hyperlinkFromString:lToken
+													 URL:[NSURL URLWithString:
+														  [NSString stringWithFormat:@"http://twitter.com/%@", [lToken substringFromIndex:1]]]
+											  attributes:[self defaultLinkFontAttributes]]];
+			}
+			else if([lUtils isTagToken:lToken]){
+				[lProcessedString appendAttributedString:
+				 [NSAttributedString hyperlinkFromString:lToken
+													 URL:[NSURL URLWithString:
+														  [NSString stringWithFormat:@"http://twitter.com/#search?q=%%23%@", [lToken substringFromIndex:1]]]
+											  attributes:[self defaultLinkFontAttributes]]];
+			}
         } else {
             NSMutableAttributedString *lAttrStr = [[[NSMutableAttributedString alloc] initWithString:lToken] autorelease];
-            [lAttrStr setAttributes:[self defaultFontAttributes] range:NSMakeRange(0, [lAttrStr length])];
+			[lAttrStr setAttributes:[self defaultFontAttributes] range:NSMakeRange(0, [lAttrStr length])];
             [lProcessedString appendAttributedString:lAttrStr];
         }
     }

@@ -393,7 +393,7 @@
 																isReply:lDecision == 1];
 				}
 				@catch (NSException * e) {
-					NSLog(@"%@", lCurrentStatus);
+					NSLog(@"Exception NSException while parsing message: %@", lCurrentStatus);
 					continue;
 				}
 				if ((lDecision == 1 || lBoxToAdd.sType == ReplyMessage) && 
