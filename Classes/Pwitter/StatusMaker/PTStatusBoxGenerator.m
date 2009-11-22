@@ -27,7 +27,7 @@
 	[NSValueTransformer setValueTransformer:lToolTrans forName:@"TooltipTransformer"];
 }
 
-- (PTStatusBox *)constructStatusBox:(NSDictionary *)aStatusInfo isReply:(BOOL)aIsReply {
+- (PTStatusBox *)constructStatusBox:(NSDictionary *)aStatusInfo isReply:(BOOL)aIsReply isRetweet:(BOOL)aIsRetweet {
 	//NSLog(@"1");
 	PTStatusBox *lNewBox = [[PTStatusBox alloc] init];
 	//NSLog(@"2");
@@ -54,13 +54,16 @@
 		lNewBox.userHome = nil;
 	}
 	//NSLog(@"11");
-	if (lNewBox.sType == NormalMessage) {
+	lNewBox.entityColor = [[PTColorManager sharedSingleton] tweetColor];
+	lNewBox.sType = NormalMessage;
+	
+	if (lNewBox.sType == NormalMessage && (aIsReply || aIsRetweet)) {
 		if (aIsReply) {
 			lNewBox.entityColor = [[PTColorManager sharedSingleton] replyColor];
 			lNewBox.sType = ReplyMessage;
-		} else {
-			lNewBox.entityColor = [[PTColorManager sharedSingleton] tweetColor];
-			lNewBox.sType = NormalMessage;
+		} 
+		else if (aIsRetweet) {
+			lNewBox.sType = RetweetMessage;
 		}
 	}
 	//NSLog(@"12");
@@ -79,6 +82,13 @@
 	lNewBox.replyId = [[NSDecimalNumber decimalNumberWithString:[aStatusInfo valueForKeyPath:@"in_reply_to_status_id"]] longLongValue];
 	//NSLog(@"16");
 	lNewBox.replyUserId = [aStatusInfo objectForKey:@"in_reply_to_screen_name"];
+	
+	if (lNewBox.sType == RetweetMessage) {
+		lNewBox.retweetId = [[NSDecimalNumber decimalNumberWithString:[[aStatusInfo objectForKey:@"retweeted_status"] valueForKeyPath:@"id"]] longLongValue];
+	} else {
+		lNewBox.retweetId = 0;
+	}
+	
 	//NSLog(@"17");
 	lNewBox.readFlag = [[PTReadManager getInstance] isUpdateRead:lNewBox.updateId];
 	//NSLog(@"18");

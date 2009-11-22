@@ -250,7 +250,7 @@
 }
 
 - (void)retweetStatus:(PTStatusBox *)aBox {
-	if (aBox.sType == ErrorMessage) return;
+	if (aBox.sType == ErrorMessage || aBox.sType == DirectMessage) return;
 	NSString *lMessageTarget = [NSString stringWithFormat:@"RT @%@ %@", aBox.userId, [aBox.statusMessage string]];
 	[fMainWindow makeFirstResponder:fStatusUpdateField];
 	[fStatusUpdateField setStringValue:lMessageTarget];

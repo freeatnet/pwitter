@@ -30,6 +30,12 @@
 	[fMainActionHandler updateCollection];
 }
 
+- (IBAction)showRetweets:(id)sender {
+	NSPredicate *lPredicate = [NSPredicate predicateWithFormat:@"%K == 4", @"sType"];
+	[fStatusController setFilterPredicate:lPredicate];
+	[fMainActionHandler updateCollection];
+}
+
 - (IBAction)showUpdates:(id)sender {
 	NSPredicate *lPredicate = [NSPredicate predicateWithFormat:@"%K == 0", @"sType"];
 	[fStatusController setFilterPredicate:lPredicate];

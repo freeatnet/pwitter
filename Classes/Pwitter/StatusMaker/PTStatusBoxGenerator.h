@@ -13,7 +13,7 @@
 @interface PTStatusBoxGenerator : NSObject {
     IBOutlet id fMainController;
 }
-- (PTStatusBox *)constructStatusBox:(NSDictionary *)aStatusInfo isReply:(BOOL)aIsReply;
+- (PTStatusBox *)constructStatusBox:(NSDictionary *)aStatusInfo isReply:(BOOL)aIsReply isRetweet:(BOOL)aIsRetweet;
 - (PTStatusBox *)constructErrorBox:(NSError *)aError;
 - (PTStatusBox *)constructMessageBox:(NSDictionary *)aStatusInfo;
 

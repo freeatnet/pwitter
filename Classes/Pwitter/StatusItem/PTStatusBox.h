@@ -11,6 +11,7 @@
 
 typedef enum statusType {
 	NormalMessage = 0,
+	RetweetMessage = 4,
 	ReplyMessage = 1,
 	DirectMessage = 2,
 	ErrorMessage = 3
@@ -31,6 +32,7 @@ typedef enum statusType {
 	long long updateId;
 	long long replyId;
 	NSString *replyUserId;
+	long long retweetId;
 	BOOL readFlag;
 	BOOL fav;
 }
@@ -49,6 +51,7 @@ typedef enum statusType {
 @property(readwrite) long long updateId;
 @property(readwrite) long long replyId;
 @property(copy, readwrite) NSString *replyUserId;
+@property(readwrite) long long retweetId;
 @property(readwrite) BOOL readFlag;
 @property(readwrite) BOOL fav;
 

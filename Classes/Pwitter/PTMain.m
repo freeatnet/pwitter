@@ -385,12 +385,15 @@
 					(![[PTPreferenceManager sharedSingleton] receiveFromNonFollowers] && lUpdateType != @"INIT_UPDATE")) {
 					lDecision = 1;
 				}
-			} else lDecision = 2;
+			} else if ([lCurrentStatus objectForKey:@"retweeted_status"] != nil) {
+				lDecision = 2;
+			} else lDecision = 3;
 			if (lDecision != 0) {
 				PTStatusBox *lBoxToAdd = nil;
 				@try {
 					lBoxToAdd = [fStatusBoxGenerator constructStatusBox:lCurrentStatus 
-																isReply:lDecision == 1];
+																isReply:lDecision == 1
+															  isRetweet:lDecision == 2];
 				}
 				@catch (NSException * e) {
 					NSLog(@"Exception NSException while parsing message: %@", lCurrentStatus);
@@ -412,7 +415,9 @@
 		[fBoxesToNotify addObjectsFromArray:lTempBoxes];
 	}
 	[fBoxesToAdd addObjectsFromArray:lTempBoxes];
-	long long lNewId = [[NSDecimalNumber decimalNumberWithString:[lLastStatus valueForKeyPath:@"id"]] longLongValue];
+	long long lNewId = 0;
+	if (lLastStatus)
+		lNewId = [[NSDecimalNumber decimalNumberWithString:[lLastStatus valueForKeyPath:@"id"]] longLongValue];
 	if (lUpdateType == @"POST") {
 		fCurrentSoundStatus = StatusSent;
 		[self postComplete];
