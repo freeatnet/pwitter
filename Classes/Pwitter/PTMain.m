@@ -187,7 +187,7 @@
 						forKey:[fTwitterEngine getDirectMessagesSinceID:0
 													   startingAtPage:0]];
 	[fRequestDetails setObject:@"INIT_UPDATE" 
-						forKey:[fTwitterEngine getFollowedTimelineSinceID:0 startingAtPage:1 count:200]];
+						forKey:[fTwitterEngine getHomeTimelineSinceID:0 startingAtPage:1 count:200]];
 	[fRequestDetails setObject:@"INIT_REPLY_UPDATE" 
 						forKey:[fTwitterEngine getRepliesSinceID:fLastReplyID startingAtPage:0 count:100]];
 }
@@ -506,7 +506,7 @@
 		[self startingTransaction];
 		fUpdating = YES;
 		[fRequestDetails setObject:@"UPDATE" 
-							forKey:[fTwitterEngine getFollowedTimelineSinceID:fLastUpdateID 
+							forKey:[fTwitterEngine getHomeTimelineSinceID:fLastUpdateID 
 															   startingAtPage:0 count:200]];
 		if ([[PTPreferenceManager sharedSingleton] receiveFromNonFollowers]) {
 			[fRequestDetails setObject:@"REPLY_UPDATE" 

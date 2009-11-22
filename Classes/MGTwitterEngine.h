@@ -83,25 +83,43 @@
 // All methods below return a unique connection identifier.
 // ======================================================================================================
 
-// Status methods
+// Timeline methods
 
 - (NSString *)getPublicTimeline; // statuses/public_timeline
 
-- (NSString *)getFollowedTimelineSinceID:(long long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/friends_timeline
-- (NSString *)getFollowedTimelineSinceID:(long long)sinceID withMaximumID:(long long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/friends_timeline
+- (NSString *)getHomeTimelineSinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/home_timeline
+- (NSString *)getHomeTimelineSinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/home_timeline
 
-- (NSString *)getUserTimelineFor:(NSString *)username sinceID:(long long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/user_timeline & statuses/user_timeline/user
-- (NSString *)getUserTimelineFor:(NSString *)username sinceID:(long long)sinceID withMaximumID:(long long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/user_timeline & statuses/user_timeline/user
+- (NSString *)getFollowedTimelineSinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/friends_timeline
+- (NSString *)getFollowedTimelineSinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/friends_timeline
 
-- (NSString *)getUpdate:(long long)updateID; // statuses/show
-- (NSString *)sendUpdate:(NSString *)status; // statuses/update
-- (NSString *)sendUpdate:(NSString *)status inReplyTo:(long long)updateID; // statuses/update
+- (NSString *)getUserTimelineFor:(NSString *)username sinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/user_timeline & statuses/user_timeline/user
+- (NSString *)getUserTimelineFor:(NSString *)username sinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/user_timeline & statuses/user_timeline/user
 
 - (NSString *)getRepliesStartingAtPage:(int)pageNum; // statuses/mentions
-- (NSString *)getRepliesSinceID:(long long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/mentions
-- (NSString *)getRepliesSinceID:(long long)sinceID withMaximumID:(long long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/mentions
+- (NSString *)getRepliesSinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/mentions
+- (NSString *)getRepliesSinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/mentions
 
-- (NSString *)deleteUpdate:(long long)updateID; // statuses/destroy
+- (NSString *)getRetweetedByMeSinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/retweets_by_me
+- (NSString *)getRetweetedByMeSinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/retweets_by_me
+
+- (NSString *)getRetweetedToMeSinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/retweets_to_me
+- (NSString *)getRetweetedToMeSinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/retweets_to_me
+
+- (NSString *)getRetweetsOfMeSinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count; // statuses/retweets_of_me
+- (NSString *)getRetweetsOfMeSinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // statuses/retweets_of_me
+
+// Status methods
+
+- (NSString *)getUpdate:(unsigned long)updateID; // statuses/show
+- (NSString *)sendUpdate:(NSString *)status; // statuses/update
+- (NSString *)sendUpdate:(NSString *)status inReplyTo:(unsigned long)updateID; // statuses/update
+
+- (NSString *)sendRetweet:(unsigned long)updateID; // statuses/retweet
+- (NSString *)getRetweets:(unsigned long)updateID; // statuses/retweets
+- (NSString *)getRetweets:(unsigned long)updateID count:(int)count; // statuses/retweets
+
+- (NSString *)deleteUpdate:(unsigned long)updateID; // statuses/destroy
 
 - (NSString *)getFeaturedUsers; // statuses/features (undocumented, returns invalid JSON data)
 
@@ -118,14 +136,14 @@
 
 // Direct Message methods
 
-- (NSString *)getDirectMessagesSinceID:(long long)sinceID startingAtPage:(int)pageNum; // direct_messages
-- (NSString *)getDirectMessagesSinceID:(long long)sinceID withMaximumID:(long long)maxID startingAtPage:(int)pageNum count:(int)count; // direct_messages
+- (NSString *)getDirectMessagesSinceID:(unsigned long)sinceID startingAtPage:(int)pageNum; // direct_messages
+- (NSString *)getDirectMessagesSinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // direct_messages
 
-- (NSString *)getSentDirectMessagesSinceID:(long long)sinceID startingAtPage:(int)pageNum; // direct_messages/sent
-- (NSString *)getSentDirectMessagesSinceID:(long long)sinceID withMaximumID:(long long)maxID startingAtPage:(int)pageNum count:(int)count; // direct_messages/sent
+- (NSString *)getSentDirectMessagesSinceID:(unsigned long)sinceID startingAtPage:(int)pageNum; // direct_messages/sent
+- (NSString *)getSentDirectMessagesSinceID:(unsigned long)sinceID withMaximumID:(unsigned long)maxID startingAtPage:(int)pageNum count:(int)count; // direct_messages/sent
 
 - (NSString *)sendDirectMessage:(NSString *)message to:(NSString *)username; // direct_messages/new
-- (NSString *)deleteDirectMessage:(long long)updateID;// direct_messages/destroy
+- (NSString *)deleteDirectMessage:(unsigned long)updateID;// direct_messages/destroy
 
 
 // Friendship methods
@@ -159,7 +177,7 @@
 
 - (NSString *)getFavoriteUpdatesFor:(NSString *)username startingAtPage:(int)pageNum; // favorites
 
-- (NSString *)markUpdate:(long long)updateID asFavorite:(BOOL)flag; // favorites/create, favorites/destroy
+- (NSString *)markUpdate:(unsigned long)updateID asFavorite:(BOOL)flag; // favorites/create, favorites/destroy
 
 
 // Notification methods
@@ -194,8 +212,8 @@
 // Search method
 
 - (NSString *)getSearchResultsForQuery:(NSString *)query;
-- (NSString *)getSearchResultsForQuery:(NSString *)query sinceID:(long long)sinceID startingAtPage:(int)pageNum count:(int)count; // search
-- (NSString *)getSearchResultsForQuery:(NSString *)query sinceID:(long long)sinceID startingAtPage:(int)pageNum count:(int)count geocode:(NSString *)geocode;
+- (NSString *)getSearchResultsForQuery:(NSString *)query sinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count; // search
+- (NSString *)getSearchResultsForQuery:(NSString *)query sinceID:(unsigned long)sinceID startingAtPage:(int)pageNum count:(int)count geocode:(NSString *)geocode;
 
 // Trends method
 
