@@ -85,8 +85,10 @@
 	
 	if (lNewBox.sType == RetweetMessage) {
 		lNewBox.retweetId = [[NSDecimalNumber decimalNumberWithString:[[aStatusInfo objectForKey:@"retweeted_status"] valueForKeyPath:@"id"]] longLongValue];
+		lNewBox.retweetUserId = [[[aStatusInfo objectForKey:@"retweeted_status"] objectForKey:@"user"] objectForKey:@"screen_name"];
 	} else {
 		lNewBox.retweetId = 0;
+		lNewBox.retweetUserId = [NSString stringWithFormat:@""];
 	}
 	
 	//NSLog(@"17");

@@ -86,6 +86,9 @@
 	[lMenu insertItemWithTitle:@"Toggle Favorite" action:@selector(addToFav:) keyEquivalent:@"F" atIndex:2];
 	[lMenu insertItemWithTitle:@"Retweet Selection" action:@selector(retweetSelection:) keyEquivalent:@"r" atIndex:3];
 	[[lMenu itemAtIndex:3] setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask];
+	if ([lBox.userId isEqualToString:[[PTPreferenceManager sharedSingleton] userName]] || 
+		(lBox.sType == DirectMessage || lBox.sType == ErrorMessage))
+		[[lMenu itemAtIndex:3] setAction:nil];
 	[lMenu insertItemWithTitle:@"Delete Selection" action:@selector(deleteSelection:) keyEquivalent:@"⌦" atIndex:4];
 	if (![lBox.userId isEqualToString:[[PTPreferenceManager sharedSingleton] userName]] && 
 		lBox.sType != DirectMessage)

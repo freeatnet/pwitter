@@ -26,6 +26,7 @@
 @synthesize replyId;
 @synthesize replyUserId;
 @synthesize retweetId;
+@synthesize retweetUserId;
 @synthesize readFlag;
 @synthesize fav;
 
