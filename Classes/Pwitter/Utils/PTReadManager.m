@@ -34,7 +34,7 @@
 		aDict = [[NSDictionary alloc] init];
 }
 
-- (BOOL)isUpdateRead:(long long)aId {
+- (BOOL)isUpdateRead:(unsigned long long)aId {
 	NSNumber *lRead = [fUnreads objectForKey:[NSNumber numberWithLongLong:aId]];
 	if (!lRead)
 		return NO;

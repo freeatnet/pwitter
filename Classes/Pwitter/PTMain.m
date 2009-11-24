@@ -375,7 +375,7 @@
 	NSDictionary *lLastStatus = nil;
 	NSMutableArray *lTempBoxes = [[NSMutableArray alloc] init];
 	for (lCurrentStatus in aStatuses) {
-		long long tweetID = [[NSDecimalNumber decimalNumberWithString:[lCurrentStatus valueForKeyPath:@"id"]] longLongValue];
+		unsigned long long tweetID = [[NSDecimalNumber decimalNumberWithString:[lCurrentStatus valueForKeyPath:@"id"]] unsignedLongLongValue];
 		if (![fStatusRecord containsObject:[NSNumber numberWithLongLong:tweetID]]) {
 			int lDecision = 0;
 			if ([[lCurrentStatus objectForKey:@"in_reply_to_screen_name"] isEqualToString:[fTwitterEngine username]]) {
@@ -417,7 +417,7 @@
 	[fBoxesToAdd addObjectsFromArray:lTempBoxes];
 	long long lNewId = 0;
 	if (lLastStatus)
-		lNewId = [[NSDecimalNumber decimalNumberWithString:[lLastStatus valueForKeyPath:@"id"]] longLongValue];
+		lNewId = [[NSDecimalNumber decimalNumberWithString:[lLastStatus valueForKeyPath:@"id"]] unsignedLongLongValue];
 	if (lUpdateType == @"POST") {
 		fCurrentSoundStatus = StatusSent;
 		[self postComplete];
@@ -440,7 +440,7 @@
 	} else if (lReqType == @"MESSAGE")
 		fCurrentSoundStatus = StatusSent;
 	if ([aMessages count] == 0 || 
-		[[NSDecimalNumber decimalNumberWithString:[[aMessages objectAtIndex:0] valueForKeyPath:@"id"]] longLongValue] == 0 || 
+		[[NSDecimalNumber decimalNumberWithString:[[aMessages objectAtIndex:0] valueForKeyPath:@"id"]] unsignedLongLongValue] == 0 || 
 		[fRequestDetails objectForKey:aIdentifier] == @"MESSAGE") {
 		return;
 	}
@@ -464,7 +464,7 @@
 	}
 	[fBoxesToAdd addObjectsFromArray:lTempArray];
 	[lTempArray release];
-	fLastMessageID = [[NSDecimalNumber decimalNumberWithString:[lLastDic valueForKeyPath:@"id"]] longLongValue];;
+	fLastMessageID = [[NSDecimalNumber decimalNumberWithString:[lLastDic valueForKeyPath:@"id"]] unsignedLongLongValue];;
 	if (fCurrentSoundStatus != ErrorReceived)
 		fCurrentSoundStatus = ReplyOrMessageReceived;
 }
@@ -594,7 +594,7 @@
 		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://twitter.com/%@", lCurrentSelection.userId]]];
 }
 
-- (void)setReplyID:(long long)aId {
+- (void)setReplyID:(unsigned long long)aId {
 	fReplyUpdateId = aId;
 }
 

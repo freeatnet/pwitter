@@ -29,10 +29,10 @@ typedef enum statusType {
 	NSDate *time;
 	NSString *searchString;
 	StatusType sType;
-	long long updateId;
-	long long replyId;
+	unsigned long long updateId;
+	unsigned long long replyId;
 	NSString *replyUserId;
-	long long retweetId;
+	unsigned long long retweetId;
 	NSString *retweetUserId;
 	BOOL readFlag;
 	BOOL fav;
@@ -49,10 +49,10 @@ typedef enum statusType {
 @property(copy, readwrite) NSDate *time;
 @property(copy, readwrite) NSString *searchString;
 @property(readwrite) StatusType sType;
-@property(readwrite) long long updateId;
-@property(readwrite) long long replyId;
+@property(readwrite) unsigned long long updateId;
+@property(readwrite) unsigned long long replyId;
 @property(copy, readwrite) NSString *replyUserId;
-@property(readwrite) long long retweetId;
+@property(readwrite) unsigned long long retweetId;
 @property(copy, readwrite) NSString *retweetUserId;
 @property(readwrite) BOOL readFlag;
 @property(readwrite) BOOL fav;
