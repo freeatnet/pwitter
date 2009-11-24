@@ -204,9 +204,6 @@
 	[self runInitialUpdates];
 	[self setupUpdateTimer];
 	[self setupMessageUpdateTimer];
-	
-	fReplyUpdateId = 0;
-	fRetweetUpdateId = 0;
 }
 
 - (void)initTransaction {
@@ -420,9 +417,7 @@
 		[fBoxesToNotify addObjectsFromArray:lTempBoxes];
 	}
 	[fBoxesToAdd addObjectsFromArray:lTempBoxes];
-	unsigned long long lNewId = 0;
-	if (lLastStatus)
-		lNewId = [[NSDecimalNumber decimalNumberWithString:[lLastStatus valueForKeyPath:@"id"]] unsignedLongLongValue];
+	unsigned long long lNewId = [[NSDecimalNumber decimalNumberWithString:[lLastStatus valueForKeyPath:@"id"]] unsignedLongLongValue];
 	if (lUpdateType == @"POST") {
 		fCurrentSoundStatus = StatusSent;
 		[self postComplete];
