@@ -294,7 +294,7 @@
 }
 
 - (IBAction)openPwitterHome:(id)sender {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://wiki.github.com/koroshiya1/pwitter"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://wiki.github.com/freeatnet/pwitter"]];
 }
 
 - (IBAction)endSearch:(id)sender {

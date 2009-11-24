@@ -196,7 +196,7 @@
 	fTwitterEngine = [[MGTwitterEngine alloc] initWithDelegate:self];
 	[fTwitterEngine setClientName:@"Pwitter" 
 						  version:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
-							  URL:@"http://github.com/koroshiya1/pwitter/wikis/home" 
+							  URL:@"http://github.com/freeatnet/pwitter/wikis/home" 
 							token:@"pwitter"];
 	[fTwitterEngine setUsername:[[PTPreferenceManager sharedSingleton] userName] 
 					   password:[[PTPreferenceManager sharedSingleton] password]];

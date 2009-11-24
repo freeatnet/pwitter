@@ -23,8 +23,10 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="1239"/>
+			<integer value="1070"/>
+			<integer value="1508"/>
 			<integer value="562"/>
-			<integer value="371"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -742,6 +744,15 @@
 									<reference key="NSOnImage" ref="185476363"/>
 									<reference key="NSMixedImage" ref="628649836"/>
 								</object>
+								<object class="NSMenuItem" id="8924869">
+									<reference key="NSMenu" ref="1070104534"/>
+									<string key="NSTitle">Show Retweets</string>
+									<string key="NSKeyEquiv">R</string>
+									<int key="NSKeyEquivModMask">1179648</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="185476363"/>
+									<reference key="NSMixedImage" ref="628649836"/>
+								</object>
 								<object class="NSMenuItem" id="830995632">
 									<reference key="NSMenu" ref="1070104534"/>
 									<string key="NSTitle">Show Direct Messages</string>
@@ -1197,6 +1208,15 @@
 									<reference key="NSOnImage" ref="185476363"/>
 									<reference key="NSMixedImage" ref="628649836"/>
 								</object>
+								<object class="NSMenuItem" id="926920394">
+									<reference key="NSMenu" ref="337255361"/>
+									<string key="NSTitle">Show Retweets</string>
+									<string key="NSKeyEquiv">R</string>
+									<int key="NSKeyEquivModMask">1179648</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="185476363"/>
+									<reference key="NSMixedImage" ref="628649836"/>
+								</object>
 								<object class="NSMenuItem" id="656130175">
 									<reference key="NSMenu" ref="337255361"/>
 									<string key="NSTitle">Show Direct Messages</string>
@@ -1593,11 +1613,11 @@
 												<object class="NSView" id="766733861">
 													<reference key="NSNextResponder" ref="245296969"/>
 													<int key="NSvFlags">274</int>
-													<string key="NSFrameSize">{230, 370}</string>
+													<string key="NSFrameSize">{245, 370}</string>
 													<reference key="NSSuperview" ref="245296969"/>
 												</object>
 											</object>
-											<string key="NSFrameSize">{230, 370}</string>
+											<string key="NSFrameSize">{245, 370}</string>
 											<reference key="NSSuperview" ref="307448074"/>
 											<reference key="NSNextKeyView" ref="766733861"/>
 											<reference key="NSDocView" ref="766733861"/>
@@ -1609,7 +1629,7 @@
 										</object>
 										<object class="BGHUDScroller" id="647314322">
 											<reference key="NSNextResponder" ref="307448074"/>
-											<int key="NSvFlags">256</int>
+											<int key="NSvFlags">-2147483392</int>
 											<string key="NSFrame">{{230, 0}, {15, 370}}</string>
 											<reference key="NSSuperview" ref="307448074"/>
 											<int key="NSArrowsLoc">2</int>
@@ -1633,7 +1653,7 @@
 									<string key="NSFrameSize">{245, 370}</string>
 									<reference key="NSSuperview" ref="137448738"/>
 									<reference key="NSNextKeyView" ref="245296969"/>
-									<int key="NSsFlags">16</int>
+									<int key="NSsFlags">528</int>
 									<reference key="NSVScroller" ref="647314322"/>
 									<reference key="NSHScroller" ref="59678748"/>
 									<reference key="NSContentView" ref="245296969"/>
@@ -7304,6 +7324,22 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					</object>
 					<int key="connectionID">2345</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showRetweets:</string>
+						<reference key="source" ref="638901683"/>
+						<reference key="destination" ref="8924869"/>
+					</object>
+					<int key="connectionID">2348</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showRetweets:</string>
+						<reference key="source" ref="638901683"/>
+						<reference key="destination" ref="926920394"/>
+					</object>
+					<int key="connectionID">2350</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -8093,6 +8129,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<reference ref="324307277"/>
 							<reference ref="310680909"/>
 							<reference ref="965607209"/>
+							<reference ref="8924869"/>
 						</object>
 						<reference key="parent" ref="364351754"/>
 					</object>
@@ -8714,6 +8751,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<reference ref="534308978"/>
 							<reference ref="968313579"/>
 							<reference ref="767069011"/>
+							<reference ref="926920394"/>
 						</object>
 						<reference key="parent" ref="161214620"/>
 					</object>
@@ -10723,6 +10761,16 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="object" ref="124594554"/>
 						<reference key="parent" ref="763728561"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">2346</int>
+						<reference key="object" ref="8924869"/>
+						<reference key="parent" ref="1070104534"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">2349</int>
+						<reference key="object" ref="926920394"/>
+						<reference key="parent" ref="337255361"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -11220,6 +11268,8 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>2338.IBPluginDependency</string>
 					<string>2339.IBPluginDependency</string>
 					<string>2340.IBPluginDependency</string>
+					<string>2346.IBPluginDependency</string>
+					<string>2349.IBPluginDependency</string>
 					<string>236.IBPluginDependency</string>
 					<string>236.ImportedFromIB2</string>
 					<string>29.IBEditorWindowLastContentRect</string>
@@ -11384,7 +11434,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>{{389, 624}, {156, 23}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{326, 525}, {244, 193}}</string>
+					<string>{{633, 505}, {241, 213}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -11500,7 +11550,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.binarymethod.BGHUDAppKitPlugin</string>
 					<string>com.binarymethod.BGHUDAppKitPlugin</string>
-					<string>{{75, 607}, {218, 163}}</string>
+					<string>{{75, 593}, {215, 163}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -11511,7 +11561,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{293, 517}, {244, 193}}</string>
+					<string>{{290, 483}, {241, 213}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -11880,6 +11930,8 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{329, 718}, {418, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -12048,7 +12100,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">2345</int>
+			<int key="maxID">2350</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
