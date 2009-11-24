@@ -27,6 +27,7 @@
 @synthesize replyUserId;
 @synthesize retweetId;
 @synthesize retweetUserId;
+@synthesize originalStatus;
 @synthesize readFlag;
 @synthesize fav;
 
@@ -41,6 +42,8 @@
 	if (time) [time release];
 	if (searchString) [searchString release];
 	if (replyUserId) [replyUserId release];
+	if (retweetUserId) [retweetUserId release];
+	if (originalStatus) [originalStatus release];
 	[super dealloc];
 }
 

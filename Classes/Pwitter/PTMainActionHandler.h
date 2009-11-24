@@ -30,6 +30,7 @@
     IBOutlet id fNormalItemPrototype;
     IBOutlet id fStatusCollectionView;
     IBOutlet id fPostView;
+    IBOutlet id fUpdateActionBox;
     IBOutlet id fReplyToBox;
     IBOutlet id fFavButton;
     IBOutlet id fCharacterCounter;

@@ -204,6 +204,9 @@
 	[self runInitialUpdates];
 	[self setupUpdateTimer];
 	[self setupMessageUpdateTimer];
+	
+	fReplyUpdateId = 0;
+	fRetweetUpdateId = 0;
 }
 
 - (void)initTransaction {
@@ -309,6 +312,8 @@
 	[fStatusUpdateField setStringValue:@""];
 	[fTextLevelIndicator setIntValue:140];
 	[fMainWindow makeFirstResponder:fStatusCollection];
+	fReplyUpdateId = 0;
+	fRetweetUpdateId = 0;
 }
 
 - (void)connectionFinished:(NSString *)connectionIdentifier {
@@ -415,7 +420,7 @@
 		[fBoxesToNotify addObjectsFromArray:lTempBoxes];
 	}
 	[fBoxesToAdd addObjectsFromArray:lTempBoxes];
-	long long lNewId = 0;
+	unsigned long long lNewId = 0;
 	if (lLastStatus)
 		lNewId = [[NSDecimalNumber decimalNumberWithString:[lLastStatus valueForKeyPath:@"id"]] unsignedLongLongValue];
 	if (lUpdateType == @"POST") {
@@ -574,13 +579,21 @@
 		[fRequestDetails setObject:@"MESSAGE" 
 							forKey:[fTwitterEngine sendDirectMessage:lMessageToSend 
 																  to:lMessageTarget]];
-	} else {
+	} else if (fReplyUpdateId > 0) {
 		[fRequestDetails setObject:@"POST" 
 							forKey:[fTwitterEngine sendUpdate:aMessage 
 													inReplyTo:fReplyUpdateId]];
+	} else if (fRetweetUpdateId > 0) {
+		NSLog(@"Retweet action on %qu", fRetweetUpdateId);
+		[fRequestDetails setObject:@"POST" 
+							forKey:[fTwitterEngine sendRetweet:fRetweetUpdateId]];
+	} else {
+		[fRequestDetails setObject:@"POST" 
+							forKey:[fTwitterEngine sendUpdate:aMessage]];
 	}
 	[fStatusUpdateField setEnabled:NO];
 	fReplyUpdateId = 0;
+	fRetweetUpdateId = 0;
 	[fMainActionHandler closeReplyView];
 }
 
@@ -596,6 +609,10 @@
 
 - (void)setReplyID:(unsigned long long)aId {
 	fReplyUpdateId = aId;
+}
+
+- (void)setRetweetID:(unsigned long long)aId {
+	fRetweetUpdateId = aId;
 }
 
 - (void)favStatus:(PTStatusBox *)aBox {

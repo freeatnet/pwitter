@@ -144,13 +144,15 @@
 }
 
 - (void)replyToStatus:(PTStatusBox *)aBox {
-	NSString *replyTarget = [NSString stringWithFormat:@"@%@ %@", aBox.userId, [fStatusUpdateField stringValue]];
+	NSString *lUserId = (aBox.sType==RetweetMessage?aBox.retweetUserId:aBox.userId);
+	NSString *replyTarget = [NSString stringWithFormat:@"@%@ %@", lUserId, [fStatusUpdateField stringValue]];
 	[fMainWindow makeFirstResponder:fStatusUpdateField];
 	[fStatusUpdateField setStringValue:replyTarget];
 	[(NSText *)[fMainWindow firstResponder] setSelectedRange:NSMakeRange([[fStatusUpdateField stringValue] length], 0)];
 	[fCharacterCounter setIntValue:140 - [[fStatusUpdateField stringValue] length]];
-	[fMainController setReplyID:aBox.updateId];
-	[fReplyToBox setStringValue:[@"@" stringByAppendingString:aBox.userId]];
+	[fMainController setReplyID:(aBox.sType==RetweetMessage?aBox.retweetId:aBox.updateId)];
+	[fUpdateActionBox setStringValue:@"Replying to"];
+	[fReplyToBox setStringValue:[@"@" stringByAppendingString:lUserId]];
 	[self openReplyView];
 }
 
@@ -251,11 +253,17 @@
 
 - (void)retweetStatus:(PTStatusBox *)aBox {
 	if (aBox.sType == ErrorMessage || aBox.sType == DirectMessage) return;
-	NSString *lMessageTarget = [NSString stringWithFormat:@"RT @%@ %@", aBox.userId, [aBox.statusMessage string]];
+	NSString *lUserId = (aBox.sType==RetweetMessage?aBox.retweetUserId:aBox.userId);
+	NSString *lMessage = (aBox.sType==RetweetMessage?aBox.originalStatus:[aBox.statusMessage string]);
+	NSString *lMessageTarget = [NSString stringWithFormat:@"RT @%@ %@", lUserId, lMessage];
 	[fMainWindow makeFirstResponder:fStatusUpdateField];
 	[fStatusUpdateField setStringValue:lMessageTarget];
+	[fMainController setRetweetID:(aBox.sType==RetweetMessage?aBox.retweetId:aBox.updateId)];
 	[(NSText *)[fMainWindow firstResponder] setSelectedRange:NSMakeRange([[fStatusUpdateField stringValue] length], 0)];
 	[fCharacterCounter setIntValue:140 - [[fStatusUpdateField stringValue] length]];
+	[fUpdateActionBox setStringValue:@"Retweeting"];
+	[fReplyToBox setStringValue:[@"@" stringByAppendingString:lUserId]];
+	[self openReplyView];
 }
 
 - (IBAction)retweetSelection:(id)sender {

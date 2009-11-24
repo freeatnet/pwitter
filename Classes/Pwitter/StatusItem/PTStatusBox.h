@@ -34,6 +34,7 @@ typedef enum statusType {
 	NSString *replyUserId;
 	unsigned long long retweetId;
 	NSString *retweetUserId;
+	NSString *originalStatus;
 	BOOL readFlag;
 	BOOL fav;
 }
@@ -54,6 +55,7 @@ typedef enum statusType {
 @property(copy, readwrite) NSString *replyUserId;
 @property(readwrite) unsigned long long retweetId;
 @property(copy, readwrite) NSString *retweetUserId;
+@property(copy, readwrite) NSString *originalStatus;
 @property(readwrite) BOOL readFlag;
 @property(readwrite) BOOL fav;
 
