@@ -1,0 +1,206 @@
+1 October  2009: (Version 1.1.6):
+Bug Fixed: Fixed the tweet duplicating
+Bug Fixed: Fixed the strange crash
+
+10 September 2009: (Version 1.1.5):
+Bug Fixed: Visual glitch in 10.6
+Improvement: Supported the tweet IDs larger than unsigned integer (now 64 bit signed integer)
+
+21 June 2009: (Version 1.1.4):
+Bug Fixed: Fixed the number issue when opening a tweet on browser
+
+14 June 2009: (Version 1.1.3):
+Bug Fixed: Mentions tweets duplication issue fixed
+
+13 June 2009: (Version 1.1.2):
+Bug Fixed: Issue with overflown unsigned 32bit integer fixed
+Bug Fixed: Search field was selectable when hidden
+
+30 April 2009: (Version 1.1.1):
+Bug Fixed: Post duplication issue fix
+Bug Fixed: Less initial API use
+Bug Fixed: POST method has been deprecated due to Twitter API change
+Bug Fixed: URL shortening service zi.ma is no longer available
+
+4 March 2009: (Version 1.1):
+Feature: Custom filter support
+Feature: Added support for URL shortening services
+Feature: Automatically expanding post field
+Feature: Added an option to hide on deactivate
+Feature: Added an option to change notification limit
+Feature: Added an option to disable animation for performance improvement
+Feature: Added an option to change the maximum tweets to display (reduce this if you are having a problem with slow rendering)
+Improvement: It now shows only one error message per transaction
+Improvement: Better transaction handling
+Improvement: Underline that appears while input Japanese is now white
+Improvement: Removed the scroll arrows
+Improvement: Smaller window size restriction
+Improvement: Post field visual change
+Improvement: Preference window visual change
+Bug Fixed: Typo fix
+
+27 February 2009: (Version 1.0):
+Feature: Dynamically expanding tweet items
+Feature: Ability to delete tweets
+Feature: Option to only post when control key is also down
+Feature: Added a filter to only show posts made by the user
+Feature: Added a filter to only show favorite posts
+Feature: Added an ability to "toggle" favorite status
+Feature: Added an option to use classic tweet view
+Feature: Added an option to disable window shadow
+Feature: Added an option to use POST method to retrieve updates
+Feature: Added an option hide the application when quick read shortcut is provoked again
+Improvement: New colors for tweets
+Improvement: Tweets are highlighted more significantly when selected
+Improvement: Much smoother animation
+Improvement: Contextual menu has been improved overall
+Improvement: Top view is gone for good
+Improvement: Full name in the tweet items
+Improvement: Real time filtering will not be reset when it received an update
+Improvement: Tweet collection view can now hold 1000 items instead of 200
+Improvement: The initial update now downloads more tweets
+Improvement: Normal update can download up to 200 tweets
+Improvement: Better font
+Improvement: You can now use HJKL keys to navigate the tweet view
+Improvement: You can escape from "sending reply to" status by hitting the escape key
+Bug Fixed: Error message and error sound problem
+Bug Fixed: Sparkle control position glitch
+
+19 February 2009: (Version 0.9):
+Feature: QuickRead - you can now assign a keyboard shortcut to activate the application and start reading the tweets
+Feature: Option to show time in 12-hour notation
+Feature: Option to hide the top view (full tweet view)
+Feature: Buttons in each tweets to open context menu, reply, and message (only context menu button is available when in mini-view)
+Improvement: Hyperlink colors are now white
+Improvement: Hyperlinks in tweets can now be clicked
+Improvement: Improved URL detection
+Improvement: New icon by Susumu
+Improvement: All graphics has been redone by Susumu
+Improvement: New balloon background for tweets
+Improvement: Clicking menu bar icon toggles the window (clicking it while the window is open will close the window)
+Improvement: Animated preference menu (animates when you change the tab item)
+Improvement: Preference menu has been organized
+
+14 February 2009: (Version 0.8.3):
+Improvement: Error messages have been significantly improved
+Bug Fixed: Multiple visual glitches
+Bug Fixed: Received an error message after posting blank message
+
+13 February 2009: (Version 0.8.2):
+Feature: Clicking on an user icon will cause the application to send a reply
+Improvement: Right click menu now has an action to reply and send a message
+Improvement: Sparkle controls are now HUD
+
+9 February 2009: (Version 0.8.1):
+Improvement: New post field with white colored cursor
+Improvement: Larger post field
+Improvement: Clicking Growl notification now causes the application to activate
+Improvement: Favourite tweets are now colored
+Improvement: Tweets posted by you are darker than others
+Improvement: Menu bar icon image now has "highlighted image"
+Feature: User icon image for tweet fullview
+
+7 February 2009: (Version 0.8):
+Bug Fixed: Invalid error messages
+Improvement: Glyphs have been replaced with the better one provided by susumu
+Improvement: Menu bar icon has been replaced with the better one provided by susumu
+Improvement: Added a preference option to swap menu bar icon behavior
+Improvement: Rounded rectangle post field
+Feature: Ability to open a link in a tweet
+Feature: Read / Unread flag management
+
+4 February 2009: (Version 0.7.9):
+Bug Fixed: Forgot to implement error sound notification
+Feature: Ability to Retweet (Available from Status -> Retweet)
+Improvement: The tweet you post will appear in the status item list immediately
+
+3 February 2009: (Version 0.7.8):
+Bug Fixed: The application was not activated when the application was hidden and preference menu was opened from the menu bar icon
+Bug Fixed: Size of the status item view was not correct.
+
+3 February 2009: (Version 0.7.7):
+Feature: Right click contextual menu for tweets to open the tweet in a browser, open a reply target tweet in browser, etc.
+Improved: Menu bar icon behavior change - Left click causes the application to activate, and right click opens the menu
+Improved: 12 points font for all tweets to improve readability
+Bug Fixed: Some glyphs were slightly misaligned
+Known Issue: Switching the view to the normal view causes the view to be slightly smaller than expected. This can be fixed by simply restarting the application (this will be fixed in the next release).
+
+2 February 2009: (Version 0.7.6):
+Bug fixed: Shortcut recorder framework was not compiled as UB
+Improved: Selected tweet text view now has bigger font size, making it easier to read
+
+2 February 2009: (Version 0.7.5):
+Feature: Added a button to mark a tweet as favourite
+Improved: It now downloads 100 tweets per timeline update
+Improved: More padding on the top view
+
+2 February 2009: (Version 0.7.4):
+Improved: Darker post input field
+Improved: Reply, DM, Web buttons are now replaced with small glyphs
+Bug fixed: No sound effect was played when message was sent
+
+2 February 2009: (Version 0.7.3):
+Bug fixed: Small typo in the preference window
+Improved: Added an option to disable menu bar icon menu
+
+2 February 2009: (Version 0.7.2):
+Improved: Scroll bar is now using BGHUD scroll bar
+
+1 February 2009: (Version 0.7.1):
+Improved: Menu for menu bar icon is now implemented
+
+31 January 2009: (Version 0.7):
+Improved: Revised timeline reset method
+Improved: Revised Growl notification method
+Improved: Quick post design change
+Improved: Status collection view behavior change
+Improved: Preference window design
+Improved: Updated Twitter engine
+Improved: Hyperlink detection improvement (now recognizes many protocols such as AIM, Email, MSN, etc)
+Improved: Status posting behavior change
+Improved: Reply behavior change (you can now post in reply to specific tweet ID)
+Bug Fixed: Many major and minor memory leaks
+Feature: Detailed notification preferences
+Feature: Sound notification
+Feature: Rounded user icons
+Feature: Menubar icon (click to activate the application) - the color of the icon changes when there are new tweets to read
+Feature: Ability to hide or unhide the dock icon (requires application restart)
+
+16 January 2009: (Version 0.6):
+Improved: Revised reply status handling - more friendly to the Twitter server
+Feature: Option to ignore error messages (available from the preference window)
+Feature: Quick Post feature added (ability to provoke quick post window with a globally defined keyboard shortcut)
+Bug Fixed: Fixed the status duplication issue
+
+11 January 2009: (Version 0.5):
+Bug Fixed: Fixed the problem with checking direct messages at general update check
+Bug Fixed: Fixed the problem that did not display the posted message immediately which is a reply to the user self
+Bug Fixed: Fixed the problem switching to an account with zero status messages
+Feature: Auto-adjusting selected status message box
+Feature: Added an option to switch to a mini status view
+
+7 January 2009: (Version 0.4):
+Bug fixed: Fixed the problem with receiving updates while the status is filtered
+Feature: Growl notification support
+Feature: Ability to clear error logs from the status box
+Feature: Ability to filter the view to only see the error logs
+
+6 January 2009: (Version 0.3.3):
+Bug fixed: Problem with not receiving some updates.
+Improvement: Disabled the update button while an update is in progress.
+
+6 January 2009: (Version 0.3.2):
+Feature: Option to receive a reply from non-followers
+Bug fixed: Error message font issue
+Improvement: Revised the reply button behavior
+
+4 January 2009: (Version 0.3.1):
+Feature: Reply link support in status messages
+Improvement: User name label behavior improvement
+Improvement: Revised direct message input method
+Bug fixed: Update after failed initial update now tried to run the initial update again
+
+3 January 2009: (Version 0.3.0) Implemented searching and message filtering
+2 January 2009: (Version 0.2.2) Support for Sparkle software update framework
+2 January 2009: (Version 0.2.1) Several bug fixes and menu bar additions
+2 January 2009: (Version 0.2.0) Initial version
