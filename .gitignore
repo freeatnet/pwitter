@@ -1,4 +1,12 @@
-build
+# xcode noise
+build/*
+Pwitter.xcodeproj/*.pbxuser
+Pwitter.xcodeproj/*.mode1v3
+
+# osx noise
 .DS_Store
 */.DS_Store
 Icon Resource
+
+# Exclude Distributable
+DistributableApplication/*
