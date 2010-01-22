@@ -62,14 +62,14 @@
 				[lProcessedString appendAttributedString:
 				 [NSAttributedString hyperlinkFromString:lToken
 													 URL:[NSURL URLWithString:
-														  [NSString stringWithFormat:@"http://twitter.com/%@", [lToken substringFromIndex:1]]]
+														  [NSString stringWithFormat:@"http://%@/%@", [[PTPreferenceManager sharedSingleton] homeUrl], [lToken substringFromIndex:1]]]
 											  attributes:[self defaultLinkFontAttributes]]];
 			}
 			else if([lUtils isTagToken:lToken]){
 				[lProcessedString appendAttributedString:
 				 [NSAttributedString hyperlinkFromString:lToken
 													 URL:[NSURL URLWithString:
-														  [NSString stringWithFormat:@"http://twitter.com/#search?q=%%23%@", [lToken substringFromIndex:1]]]
+														  [NSString stringWithFormat:@"http://%@/#search?q=%%23%@", [[PTPreferenceManager sharedSingleton] homeUrl], [lToken substringFromIndex:1]]]
 											  attributes:[self defaultLinkFontAttributes]]];
 			}
         } else {
@@ -92,7 +92,7 @@
 	NSString *lTempUserLabel = [NSString stringWithFormat:@"%@ / %@", aScreenName, aName];
 	NSMutableAttributedString *lUserLabel = [[NSMutableAttributedString alloc] initWithString:lTempUserLabel];
 	[lUserLabel beginEditing];
-	NSURL *lUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://twitter.com/%@", aScreenName]];
+	NSURL *lUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@", [[PTPreferenceManager sharedSingleton] homeUrl], aScreenName]];
 	NSDictionary *lLinkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:lUrl, NSLinkAttributeName, 
 									 [NSNumber numberWithInt:NSSingleUnderlineStyle], NSUnderlineStyleAttributeName, 
 									 [NSColor whiteColor], NSForegroundColorAttributeName, 

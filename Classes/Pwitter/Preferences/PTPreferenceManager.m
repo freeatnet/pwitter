@@ -39,12 +39,32 @@ static PTPreferenceManager *sharedSingleton;
 
 - (void)setupPreferences {
 	fPrefData = [NSUserDefaults standardUserDefaults];
+
+	if (![fPrefData stringForKey:@"home_url"])
+		[fPrefData setObject:@"twitter.com" forKey:@"home_url"];
+	if (![fPrefData stringForKey:@"api_url"])
+		[fPrefData setObject:@"twitter.com" forKey:@"api_url"];
+	if (![fPrefData boolForKey:@"api_https"])
+		[fPrefData setBool:TRUE forKey:@"api_https"];
+	
 	if ([fPrefData integerForKey:@"time_interval"] == 0)
 		[fPrefData setInteger:2 forKey:@"time_interval"];
 	if ([fPrefData integerForKey:@"message_interval"] == 0)
 		[fPrefData setInteger:3 forKey:@"message_interval"];
 	if ([fPrefData integerForKey:@"status_update_behavior"] == 0)
 		[fPrefData setInteger:1 forKey:@"status_update_behavior"];
+}
+
+- (NSString *)homeUrl {
+	return [fPrefData stringForKey:@"home_url"];
+}
+
+- (NSString *)apiUrl {
+	return [fPrefData stringForKey:@"api_url"];
+}
+
+- (BOOL)apiSecure {
+	return [fPrefData boolForKey:@"api_https"];
 }
 
 - (void)setUserName:(NSString *)aUserName password:(NSString *)aPassword {

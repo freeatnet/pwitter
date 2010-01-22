@@ -105,7 +105,7 @@
 }
 
 - (IBAction)openHome:(id)sender {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://twitter.com/home"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@/", [[PTPreferenceManager sharedSingleton] homeUrl]]]];
 }
 
 - (IBAction)openWebSelected:(id)sender {
@@ -290,7 +290,7 @@
 - (IBAction)openSelectedUser:(id)sender {
     PTStatusBox *lCurrentSelection = [[fStatusCollectionView selectedObjects] lastObject];
 	if (lCurrentSelection)
-		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[@"http://twitter.com/" stringByAppendingString:lCurrentSelection.userId]]];
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@", [[PTPreferenceManager sharedSingleton] homeUrl], lCurrentSelection.userId]]];
 }
 
 - (IBAction)openPwitterHome:(id)sender {
@@ -305,7 +305,7 @@
 	PTStatusBox *lCurrentSelection = [[fStatusCollectionView selectedObjects] lastObject];
 	if (lCurrentSelection) {
 		if (lCurrentSelection.sType == NormalMessage || lCurrentSelection.sType == ReplyMessage) {
-			NSString *lUrlString = [NSString stringWithFormat:@"http://twitter.com/%@/status/%qu", lCurrentSelection.userId, lCurrentSelection.updateId];
+			NSString *lUrlString = [NSString stringWithFormat:@"http://%@/%@/status/%qu", [[PTPreferenceManager sharedSingleton] homeUrl], lCurrentSelection.userId, lCurrentSelection.updateId];
 			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:lUrlString]];
 		}
 	}
@@ -315,7 +315,7 @@
 	PTStatusBox *lCurrentSelection = [[fStatusCollectionView selectedObjects] lastObject];
 	if (lCurrentSelection) {
 		if (lCurrentSelection.replyId != 0) {
-			NSString *lUrlString = [NSString stringWithFormat:@"http://twitter.com/%@/status/%qu", lCurrentSelection.replyUserId, lCurrentSelection.replyId];
+			NSString *lUrlString = [NSString stringWithFormat:@"http://%@/%@/status/%qu", [[PTPreferenceManager sharedSingleton] homeUrl], lCurrentSelection.replyUserId, lCurrentSelection.replyId];
 			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:lUrlString]];
 		}
 	}

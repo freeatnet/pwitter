@@ -194,6 +194,8 @@
 
 - (void)setUpTwitterEngine {
 	fTwitterEngine = [[MGTwitterEngine alloc] initWithDelegate:self];
+	[fTwitterEngine setUsesSecureConnection:[[PTPreferenceManager sharedSingleton] apiSecure]];
+	[fTwitterEngine setAPIDomain:[[PTPreferenceManager sharedSingleton] apiUrl]];
 	[fTwitterEngine setClientName:@"Pwitter" 
 						  version:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
 							  URL:@"http://github.com/freeatnet/pwitter/wikis/home" 
@@ -605,7 +607,7 @@
 - (void)openTwitterWeb {
 	PTStatusBox *lCurrentSelection = [[fStatusController selectedObjects] lastObject];
 	if (lCurrentSelection && lCurrentSelection.sType != ErrorMessage)
-		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://twitter.com/%@", lCurrentSelection.userId]]];
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@", [[PTPreferenceManager sharedSingleton] homeUrl], lCurrentSelection.userId]]];
 }
 
 - (void)setReplyID:(unsigned long long)aId {

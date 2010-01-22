@@ -24,14 +24,14 @@
 - (void)openInBrowser:(id)sender {
 	PTStatusBox *lBox = [fColItem representedObject];
 	if (lBox.updateId != 0) {
-		NSString *lUrlString = [NSString stringWithFormat:@"http://twitter.com/%@/status/%qu", lBox.userId, lBox.updateId];
+		NSString *lUrlString = [NSString stringWithFormat:@"http://%@/%@/status/%qu", [[PTPreferenceManager sharedSingleton] homeUrl], lBox.userId, lBox.updateId];
 		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:lUrlString]];
 	}
 }
 
 - (void)openUserPage:(id)sender {
 	PTStatusBox *lBox = [fColItem representedObject];
-	NSString *lUrlString = [NSString stringWithFormat:@"http://twitter.com/%@", lBox.userId];
+	NSString *lUrlString = [NSString stringWithFormat:@"http://%@/%@", [[PTPreferenceManager sharedSingleton] homeUrl], lBox.userId];
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:lUrlString]];
 }
 
@@ -42,7 +42,7 @@
 
 - (void)openReply:(id)sender {
 	PTStatusBox *lBox = [fColItem representedObject];
-	NSString *lUrlString = [NSString stringWithFormat:@"http://twitter.com/%@/status/%qu", lBox.replyUserId, lBox.replyId];
+	NSString *lUrlString = [NSString stringWithFormat:@"http://%@/%@/status/%qu", [[PTPreferenceManager sharedSingleton] homeUrl], lBox.replyUserId, lBox.replyId];
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:lUrlString]];
 }
 

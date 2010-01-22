@@ -16,19 +16,54 @@
 
 + (PTPreferenceManager *)sharedSingleton;
 - (void)setupPreferences;
+
+/** API Settings **/
+- (NSString *)homeUrl;
+- (NSString *)apiUrl;
+- (BOOL)apiSecure;
+
+
+/** User credentials **/
 - (void)setUserName:(NSString *)aUserName password:(NSString *)aPassword;
 - (NSString *)userName;
 - (NSString *)password;
-- (BOOL)alwaysOnTop;
-- (BOOL)receiveFromNonFollowers;
-- (void)setTimeInterval:(int)aInterval;
-- (int)timeInterval;
-- (void)setMessageInterval:(int)aInterval;
-- (int)messageInterval;
-- (BOOL)useMiniView;
 - (BOOL)autoLogin;
+
+/** Update Preferences **/
+- (int)timeInterval;
+- (void)setTimeInterval:(int)aInterval;
+- (int)messageInterval;
+- (void)setMessageInterval:(int)aInterval;
+- (int)statusUpdateBehavior;
+- (void)setStatusUpdateBehavior:(int)aBehavior;
+- (int)urlShorteningService;
+- (BOOL)usePOSTMethod;
+- (BOOL)updateAfterPost;
+- (BOOL)receiveFromNonFollowers;
+
+/** Visual&Behavioural Preferences **/
+- (BOOL)alwaysOnTop;
+- (BOOL)useClassicView;
+- (BOOL)useMiniView;
+- (BOOL)useTwelveHour;
+- (BOOL)disableWindowShadow;
+- (void)setHideDockIcon:(BOOL)aFlag;
+- (BOOL)hideDockIcon;
+
+- (BOOL)swapMenuItemBehavior;
+- (BOOL)disableAnimation;
+- (BOOL)hideOnDeactivate;
+- (BOOL)selectOldestUnread;
+- (int)maxTweets;
+
+
+/** Access Options **/
 - (BOOL)quickPost;
 - (BOOL)quickRead;
+- (BOOL)postWithModifier;
+- (BOOL)hideWithQuickReadShortcut;
+
+/** Notification Preferences **/
 - (BOOL)ignoreErrors;
 - (BOOL)disableGrowl;
 - (BOOL)disableMessageNotification;
@@ -36,25 +71,10 @@
 - (BOOL)disableStatusNotification;
 - (BOOL)disableErrorNotification;
 - (BOOL)disableSoundNotification;
-- (void)setStatusUpdateBehavior:(int)aBehavior;
-- (int)statusUpdateBehavior;
-- (BOOL)swapMenuItemBehavior;
-- (BOOL)useTwelveHour;
-- (BOOL)usePOSTMethod;
-- (BOOL)disableWindowShadow;
-- (BOOL)hideWithQuickReadShortcut;
-- (BOOL)useClassicView;
-- (BOOL)postWithModifier;
-- (BOOL)updateAfterPost;
+- (int)maxNotification;
+
+/** Filter Settings **/
 - (id)customFilters;
 - (void)setCustomFilters:(id)aFilters;
-- (BOOL)hideOnDeactivate;
-- (BOOL)selectOldestUnread;
-- (int)urlShorteningService;
-- (int)maxNotification;
-- (BOOL)disableAnimation;
-- (int)maxTweets;
-- (void)setHideDockIcon:(BOOL)aFlag;
-- (BOOL)hideDockIcon;
 
 @end
