@@ -70,11 +70,11 @@ static PTPreferenceManager *sharedSingleton;
 - (void)setUserName:(NSString *)aUserName password:(NSString *)aPassword {
 	[fPrefData setObject:aUserName forKey:@"user_name"];
 	EMGenericKeychainItem *lTempItem = 
-	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:@"Pwitter" 
-													withUsername:aUserName];
+	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:@"Pwitter"
+													withUsername:[NSString stringWithFormat:@"%@@%@", aUserName, [fPrefData stringForKey:@"api_url"]]];
 	if (!lTempItem) {
 		[[EMKeychainProxy sharedProxy] addGenericKeychainItemForService:@"Pwitter" 
-														   withUsername:aUserName 
+														   withUsername:[NSString stringWithFormat:@"%@@%@", aUserName, [fPrefData stringForKey:@"api_url"]]
 															   password:aPassword];
 	} else {
 		[lTempItem setPassword:aPassword];
@@ -88,7 +88,7 @@ static PTPreferenceManager *sharedSingleton;
 - (NSString *)password {
 	EMGenericKeychainItem *lTempItem = 
 	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:@"Pwitter" 
-													withUsername:[fPrefData stringForKey:@"user_name"]];
+								withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [fPrefData stringForKey:@"api_url"]]];
 	if (!lTempItem) {
 		return nil;
 	} else {
