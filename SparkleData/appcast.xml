@@ -2,9 +2,17 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
 	<channel>
 		<title>Pwitter's Changelog</title>
-		<link>http://github.com/koroshiya1/pwitter/raw/master/SparkleData/appcast.xml</link>
+		<link>http://github.com/freeatnet/pwitter/raw/master/SparkleData/appcast.xml</link>
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
+		<item>
+			<title>version 1.1.8.2</title>
+			<sparkle:releaseNotesLink>
+				http://github.com/freeatnet/pwitter/raw/master/SparkleData/rnotes.html
+			</sparkle:releaseNotesLink>
+			<pubDate></pubDate>
+			<enclosure url="http://cloud.github.com/downloads/freeatnet/pwitter/Pwitter-1.1.8.2.dmg" sparkle:version="1.1.8.2" length="1481673" type="application/octet-stream" sparkle:dsaSignature="MC0CFQC2MO9tSZpGsCzJuderAxJrN9Pg0gIUTXB4mldfaX7m1u8aUj9kn1W+tok=" />
+		</item>
 		<item>
 			<title>version 1.1.6 (2 bug fix)</title>
 			<sparkle:releaseNotesLink>
