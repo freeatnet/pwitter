@@ -29,7 +29,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>http://github.com/freeatnet/pwitter/raw/master/SparkleData/appcast.xml</string>
+	<string>http://42d.ru/pwitter/SparkleData/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 </dict>
