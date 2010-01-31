@@ -8,7 +8,7 @@
 		<item>
 			<title>version 1.1.8.2</title>
 			<sparkle:releaseNotesLink>
-				http://github.com/freeatnet/pwitter/raw/master/SparkleData/rnotes.html
+				http://42d.ru/pwitter/SparkleData/rnotes.html
 			</sparkle:releaseNotesLink>
 			<pubDate>Thu, 28 Jan 2010 12:00:00 +0000</pubDate>
 			<enclosure url="http://cloud.github.com/downloads/freeatnet/pwitter/Pwitter-1.1.8.2.dmg" sparkle:version="1.1.8.2" length="1481673" type="application/octet-stream" sparkle:dsaSignature="MC0CFQC2MO9tSZpGsCzJuderAxJrN9Pg0gIUTXB4mldfaX7m1u8aUj9kn1W+tok=" />
