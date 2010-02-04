@@ -1209,8 +1209,8 @@
 								<object class="NSMenuItem" id="926920394">
 									<reference key="NSMenu" ref="337255361"/>
 									<string key="NSTitle">Show Retweets</string>
-									<string key="NSKeyEquiv">R</string>
-									<int key="NSKeyEquivModMask">1179648</int>
+									<string key="NSKeyEquiv">T</string>
+									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="185476363"/>
 									<reference key="NSMixedImage" ref="628649836"/>
