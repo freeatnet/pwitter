@@ -537,6 +537,9 @@
 		case 2:
 			lServiceURL = @"http://is.gd/api.php?longurl=";
 			break;
+		case 3:
+			lServiceURL = @"http://clck.ru/--?url=";
+			break;
 		default:
 			return aMessage;
 			break;

@@ -78,17 +78,22 @@
 							[aStatusInfo objectForKey:@"text"]];
 	//NSLog(@"14");
 	lNewBox.updateId = [[NSDecimalNumber decimalNumberWithString:[aStatusInfo valueForKeyPath:@"id"]] unsignedLongLongValue];
-	//NSLog(@"15");
-	lNewBox.replyId = [[NSDecimalNumber decimalNumberWithString:[aStatusInfo valueForKeyPath:@"in_reply_to_status_id"]] unsignedLongLongValue];
-	//NSLog(@"16");
-	lNewBox.replyUserId = [aStatusInfo objectForKey:@"in_reply_to_screen_name"];
+	
+	if ([[aStatusInfo valueForKeyPath:@"in_reply_to_status_id"] length] > 0) {
+		lNewBox.replyId = [[NSDecimalNumber decimalNumberWithString:[aStatusInfo valueForKeyPath:@"in_reply_to_status_id"]] unsignedLongLongValue];
+		lNewBox.replyUserId = [aStatusInfo objectForKey:@"in_reply_to_screen_name"];	
+	} else {
+		lNewBox.replyId = 0;
+		lNewBox.replyUserId = nil;
+	}
+
 	
 	if (lNewBox.sType == RetweetMessage) {
 		lNewBox.retweetId = [[NSDecimalNumber decimalNumberWithString:[[aStatusInfo objectForKey:@"retweeted_status"] valueForKeyPath:@"id"]] unsignedLongLongValue];
 		lNewBox.retweetUserId = [[[aStatusInfo objectForKey:@"retweeted_status"] objectForKey:@"user"] objectForKey:@"screen_name"];
 	} else {
 		lNewBox.retweetId = 0;
-		lNewBox.retweetUserId = [NSString stringWithFormat:@""];
+		lNewBox.retweetUserId = nil;
 	}
 	
 	//NSLog(@"17");
