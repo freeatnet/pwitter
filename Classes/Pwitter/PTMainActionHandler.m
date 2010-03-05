@@ -131,6 +131,7 @@
 - (void)closeReplyView {
 	if (fReplyViewIsOpen) {
 		[fMainController setReplyID:0];
+		[fMainController setRetweetID:0];
 		fReplyViewIsOpen = NO;
 		NSRect lReplyFrame = [fPostView frame];
 		NSRect lBottomFrame = [fBottomView frame];
