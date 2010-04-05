@@ -37,6 +37,7 @@
     IBOutlet id fReplyInfoView;
     IBOutlet id fMiniClassicItemPrototype;
     IBOutlet id fNormalClassicItemPrototype;
+	IBOutlet id fPopupButton;
 	BOOL fSearchBoxIsOpen;
 	BOOL fReplyViewIsOpen;
 	BOOL fShouldExit;
@@ -49,6 +50,7 @@
 - (IBAction)openWebSelected:(id)sender;
 - (IBAction)replyToSelected:(id)sender;
 - (IBAction)openPref:(id)sender;
+- (IBAction)popListsMenu:(id)sender;
 - (IBAction)openSearchBox:(id)sender;
 - (IBAction)closeSearchBox:(id)sender;
 - (IBAction)clearErrors:(id)sender;

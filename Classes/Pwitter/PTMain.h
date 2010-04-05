@@ -37,6 +37,7 @@ typedef enum soundEventType {
     IBOutlet id fMainActionHandler;
     IBOutlet id fIconMenu;
     IBOutlet id fStatusCollection;
+	IBOutlet id fListsSubmenu;
 	MGTwitterEngine *fTwitterEngine;
 	unsigned long long fLastUpdateID;
 	unsigned long long fLastMessageID;
@@ -65,6 +66,8 @@ typedef enum soundEventType {
 	BOOL fUpdating;
 	BOOL fIgnoreErrors;
 	NSMutableSet *fStatusRecord;
+	
+	NSMutableArray *fLists;
 }
 - (IBAction)updateTimeline:(id)sender;
 - (IBAction)postStatus:(id)sender;
@@ -84,6 +87,8 @@ typedef enum soundEventType {
 - (void)loadUnread;
 - (void)toggleApp;
 - (void)deleteTweet:(PTStatusBox *)aBox;
+
+- (void)loadStatusesFromList:(NSString *)listName;
 
 @property(readonly) PTMenuBarIcon *fMenuItem;
 

@@ -96,6 +96,7 @@
 		61F177A90F1C5A6B00C04938 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F177A80F1C5A6B00C04938 /* ShortcutRecorder.framework */; };
 		61F177C10F1C5CE100C04938 /* ShortcutRecorder.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61F177A80F1C5A6B00C04938 /* ShortcutRecorder.framework */; };
 		61F8E08B0F3C02DA0070C04A /* icon_mask.tif in Resources */ = {isa = PBXBuildFile; fileRef = 61F8E08A0F3C02DA0070C04A /* icon_mask.tif */; };
+		636B17A111605B9D007F9166 /* MGTwitterListsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B17A011605B9D007F9166 /* MGTwitterListsParser.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -269,6 +270,8 @@
 		61EE70630F0210C0005C42F5 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = /usr/lib/libxml2.2.dylib; sourceTree = "<absolute>"; };
 		61F177A80F1C5A6B00C04938 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShortcutRecorder.framework; sourceTree = "<group>"; };
 		61F8E08A0F3C02DA0070C04A /* icon_mask.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = icon_mask.tif; sourceTree = "<group>"; };
+		636B179F11605B9D007F9166 /* MGTwitterListsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTwitterListsParser.h; sourceTree = "<group>"; };
+		636B17A011605B9D007F9166 /* MGTwitterListsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTwitterListsParser.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Pwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -562,6 +565,8 @@
 		61B14F270FE3659A00EA7207 /* Twitter LibXML Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				636B179F11605B9D007F9166 /* MGTwitterListsParser.h */,
+				636B17A011605B9D007F9166 /* MGTwitterListsParser.m */,
 				61B14F280FE3659A00EA7207 /* MGTwitterLibXMLParser.h */,
 				61B14F290FE3659A00EA7207 /* MGTwitterLibXMLParser.m */,
 				61B14F2A0FE3659A00EA7207 /* MGTwitterStatusesLibXMLParser.h */,
@@ -755,6 +760,7 @@
 				61B14F5A0FE3659A00EA7207 /* MGTwitterMiscParser.m in Sources */,
 				61B14F610FE3659A00EA7207 /* NSString+UUID.m in Sources */,
 				61B14F620FE3659A00EA7207 /* NSData+Base64.m in Sources */,
+				636B17A111605B9D007F9166 /* MGTwitterListsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

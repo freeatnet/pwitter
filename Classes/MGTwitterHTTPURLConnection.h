@@ -10,6 +10,15 @@
 
 #import "MGTwitterRequestTypes.h"
 
+typedef enum _MGHTTPMethod {
+	MGHTTPGETMethod = 0,
+	MGHTTPHEADMethod,
+	MGHTTPPOSTMethod,
+	MGHTTPPUTMethod,
+	MGHTTPDELETEMethod,
+	
+} MGHTTPMethod;
+
 @interface MGTwitterHTTPURLConnection : NSURLConnection {
     NSMutableData *_data;                   // accumulated data received on this connection
     MGTwitterRequestType _requestType;      // general type of this request, mostly for error handling

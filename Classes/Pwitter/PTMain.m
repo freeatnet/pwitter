@@ -182,6 +182,7 @@
 }
 
 - (void)runInitialUpdates {
+	fLists = [NSMutableArray arrayWithCapacity:0];
 	[self startingTransaction];
 	[fRequestDetails setObject:@"INIT_MESSAGE_UPDATE" 
 						forKey:[fTwitterEngine getDirectMessagesSinceID:0
@@ -190,6 +191,11 @@
 						forKey:[fTwitterEngine getHomeTimelineSinceID:0 startingAtPage:1 count:200]];
 	[fRequestDetails setObject:@"INIT_REPLY_UPDATE" 
 						forKey:[fTwitterEngine getRepliesSinceID:fLastReplyID startingAtPage:0 count:100]];
+	
+	[fRequestDetails setObject:@"INIT_LISTS_SUBSCRIPTIONS" 
+						forKey:[fTwitterEngine getListSubscriptionsFor:[fTwitterEngine username] fromCursor:@"-1"]];
+	[fRequestDetails setObject:@"INIT_LISTS_OWNED" 
+						forKey:[fTwitterEngine getListsFor:[fTwitterEngine username] fromCursor:@"-1"]];
 }
 
 - (void)setUpTwitterEngine {
@@ -251,6 +257,7 @@
 	[fUpdateButton setEnabled:YES];
 	[self loadUnread];
 	[self runInitialUpdates];
+	fLists = [NSMutableArray arrayWithCapacity:0];
 }
 
 - (IBAction)activateApp:(id)sender {
@@ -440,6 +447,31 @@
 	[lTempBoxes release];
 }
 
+- (void)listsReceived:(NSArray *)aLists forRequest:(NSString *)aIdentifier {
+	NSString *lReqType = [fRequestDetails objectForKey:aIdentifier];
+	
+	NSDictionary *lCurrentList;
+	for(lCurrentList in aLists) {
+		NSLog(@"%@", lCurrentList);
+		NSMenuItem *lListItem = [NSMenuItem alloc];
+		if ([lReqType isEqualToString:@"INIT_LISTS_SUBSCRIPTIONS"]) {
+			[lListItem initWithTitle:[lCurrentList objectForKey:@"uri"] 
+											action:nil keyEquivalent:[NSString string]];
+		} else if ([lReqType isEqualToString:@"INIT_LISTS_OWNED"]) {
+			[lListItem initWithTitle:[lCurrentList objectForKey:@"uri"] 
+										  action:nil keyEquivalent:[NSString string]];
+		}
+	
+		[lListItem setTarget:fMainActionHandler];
+		[lListItem setAction:@selector(loadList:)];
+		
+		[fListsSubmenu addItem:lListItem];
+	}
+	
+	[fRequestDetails removeObjectForKey:aIdentifier];
+	
+}
+
 - (void)directMessagesReceived:(NSArray *)aMessages forRequest:(NSString *)aIdentifier
 {
 	NSString *lReqType = [fRequestDetails objectForKey:aIdentifier];
@@ -524,6 +556,13 @@
 		if ([[PTPreferenceManager sharedSingleton] receiveFromNonFollowers]) {
 			[fRequestDetails setObject:@"REPLY_UPDATE" 
 								forKey:[fTwitterEngine getRepliesSinceID:fLastReplyID startingAtPage:0 count:200]];
+		}
+		if (fLists) {
+			NSString *lListName;
+			for (lListName in fLists) {
+				[fRequestDetails setObject:@"UPDATE" 
+									forKey:[fTwitterEngine getTimelineForList:[[lListName pathComponents] objectAtIndex:2] fromUser:[[lListName pathComponents] objectAtIndex:1] sinceID:0 withMaximumID:nil startingAtPage:0 count:20]];	
+			}
 		}
 	}
 }
@@ -689,6 +728,15 @@
 			[fDeleteRecord setObject:aBox forKey:lRequestId];
 		}
 	}
+}
+
+- (void)loadStatusesFromList:(NSString *)listName {
+	NSLog(@"%@ %@", [[listName pathComponents] objectAtIndex:1], [[listName pathComponents] objectAtIndex:2]);
+	
+	[fLists addObject:listName];
+	
+	[fRequestDetails setObject:@"UPDATE" 
+						forKey:[fTwitterEngine getTimelineForList:[[listName pathComponents] objectAtIndex:2] fromUser:[[listName pathComponents] objectAtIndex:1] sinceID:0 withMaximumID:nil startingAtPage:0 count:20]];
 }
 
 @synthesize fMenuItem;

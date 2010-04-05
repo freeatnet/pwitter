@@ -175,6 +175,10 @@
 		  contextInfo:nil];
 }
 
+- (IBAction)loadList:(id)sender {
+	[fMainController loadStatusesFromList:[sender title]];
+}
+
 - (IBAction)openSearchBox:(id)sender {
 	if (!fSearchBoxIsOpen) {
 		[fSearchBox setHidden:NO];

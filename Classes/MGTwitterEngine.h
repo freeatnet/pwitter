@@ -121,10 +121,20 @@
 
 - (NSString *)deleteUpdate:(unsigned long long)updateID; // statuses/destroy
 
-- (NSString *)getFeaturedUsers; // statuses/features (undocumented, returns invalid JSON data)
+- (NSString *)getFeaturedUsers __attribute__((deprecated)); // statuses/features (undocumented, returns invalid JSON data)
 
 
 // User methods
+
+/*
+ Missing methods:
+ users/lookup
+ users/search
+ 
+ Need review:
+ statuses/friends
+ statuses/followers
+ */
 
 - (NSString *)getRecentlyUpdatedFriendsFor:(NSString *)username startingAtPage:(int)pageNum; // statuses/friends & statuses/friends/user
 
@@ -133,6 +143,33 @@
 - (NSString *)getUserInformationFor:(NSString *)usernameOrID; // users/show
 - (NSString *)getUserInformationForEmail:(NSString *)email; // users/show
 
+
+// List methods
+- (NSString *)createListWithName:(NSString *)listName isPrivate:(BOOL)modePrivate withDescription:(NSString *)listDescription; // POST lists (create)
+- (NSString *)updateListWithSlug:(NSString *)listSlug toName:(NSString *)newName isPrivate:(BOOL)modePrivate withDescription:(NSString *)listDescription; // POST lists/ID (update)
+- (NSString *)getListsFor:(NSString *)username fromCursor:(NSString *)cursor;
+- (NSString *)getListInfo:(NSString *)listSlug forUser:(NSString *)username;
+- (NSString *)deleteList:(NSString *)listSlug;
+
+- (NSString *)getTimelineForList:(NSString *)listName fromUser:(NSString *)username sinceID:(unsigned long long)sinceID withMaximumID:(unsigned long long)maxID startingAtPage:(int)pageNum count:(int)count;
+- (NSString *)getListSubscriptionsFor:(NSString *)username fromCursor:(NSString *)cursor;
+- (NSString *)getListMembershipsFor:(NSString *)username fromCursor:(NSString *)cursor;
+
+/*
+ List Members Methods
+ */
+
+// List Members methods
+
+- (NSString *)getMembersOfList:(NSString *)listSlug fromCursor:(NSString *)cursor;
+- (NSString *)addUser:(NSString *)username toList:(NSString *)listSlug;
+- (NSString *)removeUser:(NSString *)username fromList:(NSString *)listSlug;
+
+
+
+/*
+ List Subscribers Methods
+ */
 
 // Direct Message methods
 
@@ -147,18 +184,36 @@
 
 
 // Friendship methods
+/*
+ Missing methods:
+ friendships/show
+ */
 
 - (NSString *)enableUpdatesFor:(NSString *)username; // friendships/create (follow username)
 - (NSString *)disableUpdatesFor:(NSString *)username; // friendships/destroy (unfollow username)
 - (NSString *)isUser:(NSString *)username1 receivingUpdatesFor:(NSString *)username2; // friendships/exists (test if username1 follows username2)
 
+/*
+ Missing methods:
+ Social Graph Methods
+ */
+
 
 // Account methods
+
+/*
+ Missing methods:
+ account/update_profile
+ account/update_profile_colors
+ account/update_profile_image
+ account/update_profile_background_image
+ 
+ */
 
 - (NSString *)checkUserCredentials; // account/verify_credentials
 - (NSString *)endUserSession; // account/end_session
 
-- (NSString *)setLocation:(NSString *)location; // account/update_location (deprecated, use account/update_profile instead)
+- (NSString *)setLocation:(NSString *)location __attribute__((deprecated)); // account/update_location (deprecated, use account/update_profile instead)
 
 - (NSString *)setNotificationsDeliveryMethod:(NSString *)method; // account/update_delivery_device
 
@@ -188,15 +243,48 @@
 
 // Block methods
 
+/*
+ Missing:
+ blocks/exists
+ blocks/blocking
+ blocks/blocking/ids
+ */
+
 - (NSString *)block:(NSString *)username; // blocks/create
 - (NSString *)unblock:(NSString *)username; // blocks/destroy
+
+/*
+ Missing methods:
+ 
+ Spam Reporting Methods
+	-- report_spam
+ 
+ Saved Searches Methods
+	-- saved_searches
+	-- saved_searches/show
+	-- saved_searches/create
+	-- saved_searches/destroy
+ 
+ OAuth Methods:
+	-- oauth/request_token
+	-- oauth/authorize
+	-- oauth/authenticate (?)
+	-- oauth/access_token
+ 
+ xAuth Methods (?)
+ 
+ Local Trends Methods:
+	-- trends/available
+	-- trends/location
+ 
+ */
 
 
 // Help methods
 
 - (NSString *)testService; // help/test
 
-- (NSString *)getDowntimeSchedule; // help/downtime_schedule (undocumented)
+- (NSString *)getDowntimeSchedule __attribute__((deprecated)); // help/downtime_schedule (undocumented)
 
 
 #pragma mark Search API methods
