@@ -49,3 +49,15 @@
 */
 
 #define YAJL_AVAILABLE 0
+#define TOUCHJSON_AVAILABLE 0
+
+#ifndef __MGTWITTERENGINEID__
+#define __MGTWITTERENGINEID__
+typedef unsigned long long MGTwitterEngineID;
+typedef long long MGTwitterEngineCursorID;
+#endif
+
+#ifndef __MGTWITTERENGINELOCATIONDEGREES__
+#define __MGTWITTERENGINELOCATIONDEGREES__
+typedef double MGTwitterEngineLocationDegrees;
+#endif

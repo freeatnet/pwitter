@@ -10,8 +10,25 @@
 #import "NSString+UUID.h"
 
 
+
+@interface NSURLRequest (OAuthExtensions)
+-(void)prepare;
+@end
+
+@implementation NSURLRequest (OAuthExtensions)
+
+-(void)prepare{
+	// do nothing
+}
+
+@end
+
+
+
 @implementation MGTwitterHTTPURLConnection
 
+
+@synthesize response = _response;
 
 #pragma mark Initializer
 
@@ -19,7 +36,10 @@
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate 
           requestType:(MGTwitterRequestType)requestType responseType:(MGTwitterResponseType)responseType
 {
-    if (self = [super initWithRequest:request delegate:delegate]) {
+	// OAuth requests need to have -prepare called on them first. handle that case before the NSURLConnection sends it
+	[request prepare];
+	
+    if ((self = [super initWithRequest:request delegate:delegate])) {
         _data = [[NSMutableData alloc] initWithCapacity:0];
         _identifier = [[NSString stringWithNewUUID] retain];
         _requestType = requestType;
@@ -33,6 +53,7 @@
 
 - (void)dealloc
 {
+    [_response release];
     [_data release];
     [_identifier release];
 	[_URL release];
@@ -94,6 +115,5 @@
     
     return [description stringByAppendingFormat:@" (requestType = %d, identifier = %@)", _requestType, _identifier];
 }
-
 
 @end
