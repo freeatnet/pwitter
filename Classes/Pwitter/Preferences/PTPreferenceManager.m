@@ -9,6 +9,7 @@
 #import "PTPreferenceManager.h"
 #import "EMKeychainProxy.h"
 
+#define APP_NAME @"Pwitter"
 
 @implementation PTPreferenceManager
 
@@ -39,11 +40,11 @@ static PTPreferenceManager *sharedSingleton;
 
 - (void)setupPreferences {
 	fPrefData = [NSUserDefaults standardUserDefaults];
-
+	
 	if (![fPrefData stringForKey:@"home_url"])
 		[fPrefData setObject:@"twitter.com" forKey:@"home_url"];
 	if (![fPrefData stringForKey:@"api_url"])
-		[fPrefData setObject:@"twitter.com" forKey:@"api_url"];
+		[fPrefData setObject:@"api.twitter.com/1" forKey:@"api_url"];
 	if (![fPrefData boolForKey:@"api_https"])
 		[fPrefData setBool:TRUE forKey:@"api_https"];
 	
@@ -69,15 +70,26 @@ static PTPreferenceManager *sharedSingleton;
 
 - (void)setUserName:(NSString *)aUserName password:(NSString *)aPassword {
 	[fPrefData setObject:aUserName forKey:@"user_name"];
+	
 	EMGenericKeychainItem *lTempItem = 
-	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:@"Pwitter"
+	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:[NSString stringWithFormat:@"%@ Password", APP_NAME]
 													withUsername:[NSString stringWithFormat:@"%@@%@", aUserName, [fPrefData stringForKey:@"api_url"]]];
 	if (!lTempItem) {
-		[[EMKeychainProxy sharedProxy] addGenericKeychainItemForService:@"Pwitter" 
+		[[EMKeychainProxy sharedProxy] addGenericKeychainItemForService:[NSString stringWithFormat:@"%@ Password", APP_NAME]
 														   withUsername:[NSString stringWithFormat:@"%@@%@", aUserName, [fPrefData stringForKey:@"api_url"]]
 															   password:aPassword];
 	} else {
 		[lTempItem setPassword:aPassword];
+	}
+}
+
+- (void)clearPassword {
+	// TODO: freeatnet: Make the Keychain actually delete the item
+	EMGenericKeychainItem *lTempItem = [[EMKeychainProxy sharedProxy] 
+								  genericKeychainItemForService:[NSString stringWithFormat:@"%@ Password", APP_NAME]
+								withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [fPrefData stringForKey:@"api_url"]]];
+	if (lTempItem) {
+		[lTempItem setPassword:@""];
 	}
 }
 
@@ -87,8 +99,61 @@ static PTPreferenceManager *sharedSingleton;
 
 - (NSString *)password {
 	EMGenericKeychainItem *lTempItem = 
-	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:@"Pwitter" 
+	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:[NSString stringWithFormat:@"%@ Password", APP_NAME]
 								withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [fPrefData stringForKey:@"api_url"]]];
+	if (!lTempItem) {
+		return nil;
+	} else {
+		return [lTempItem password];
+	}
+}
+
+- (void)setAccessToken:(NSString *)aToken {
+	EMGenericKeychainItem *lTempItem = 
+	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:[NSString stringWithFormat:@"%@ Access Token", APP_NAME] 
+													withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [self apiUrl]]];
+	if (!lTempItem) {
+		[[EMKeychainProxy sharedProxy] addGenericKeychainItemForService:[NSString stringWithFormat:@"%@ Access Token", APP_NAME] 
+														   withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [self apiUrl]]
+															   password:aToken];
+	} else {
+		[lTempItem setPassword:aToken];
+	}
+}
+
+- (void)setAccessSecret:(NSString *)aSecret {
+	EMGenericKeychainItem *lTempItem = 
+	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:[NSString stringWithFormat:@"%@ Access Secret", APP_NAME] 
+													withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [self apiUrl]]];
+	if (!lTempItem) {
+		[[EMKeychainProxy sharedProxy] addGenericKeychainItemForService:[NSString stringWithFormat:@"%@ Access Secret", APP_NAME] 
+														   withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [self apiUrl]]
+															   password:aSecret];
+	} else {
+		[lTempItem setPassword:aSecret];
+	}
+}
+
+- (void)setAccessToken:(NSString *)aToken withSecret:(NSString *)aSecret {
+	[self setAccessToken:aToken];
+	[self setAccessSecret:aSecret];
+}
+
+- (NSString *)accessToken {
+	EMGenericKeychainItem *lTempItem = 
+	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:[NSString stringWithFormat:@"%@ Access Token", APP_NAME] 
+									withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [fPrefData stringForKey:@"api_url"]]];
+	if (!lTempItem) {
+		return nil;
+	} else {
+		return [lTempItem password];
+	}
+}
+
+- (NSString *)accessSecret {
+	EMGenericKeychainItem *lTempItem = 
+	[[EMKeychainProxy sharedProxy] genericKeychainItemForService:[NSString stringWithFormat:@"%@ Access Secret", APP_NAME] 
+													withUsername:[NSString stringWithFormat:@"%@@%@", [self userName], [fPrefData stringForKey:@"api_url"]]];
 	if (!lTempItem) {
 		return nil;
 	} else {

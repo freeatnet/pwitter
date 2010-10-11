@@ -27,7 +27,13 @@
 - (void)setUserName:(NSString *)aUserName password:(NSString *)aPassword;
 - (NSString *)userName;
 - (NSString *)password;
+- (void)clearPassword;
 - (BOOL)autoLogin;
+
+/** OAuth credentials **/
+- (void)setAccessToken:(NSString *)aToken withSecret:(NSString *)aSecret;
+- (NSString *)accessToken;
+- (NSString *)accessSecret;
 
 /** Update Preferences **/
 - (int)timeInterval;

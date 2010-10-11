@@ -14,6 +14,11 @@
 #import "PTMenuBarIcon.h"
 #import "PTImageManager.h"
 
+#ifndef TWITTER_OAUTH_TOKEN
+	#define TWITTER_OAUTH_TOKEN @"KEY"
+	#define TWITTER_OAUTH_SECRET @"SECRET"
+#endif
+
 typedef enum soundEventType {
 	NoneReceived = 0,
 	StatusReceived = 1,

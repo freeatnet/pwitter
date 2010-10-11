@@ -38,10 +38,21 @@
 	NSDate *lReceivedTime = [aStatusInfo objectForKey:@"created_at"];
 	//NSLog(@"5");
 	lNewBox.time = lReceivedTime;
-	//NSLog(@"6");
-	lNewBox.statusMessage = [PTStatusFormatter formatStatusMessage:[aStatusInfo objectForKey:@"text"] forBox:lNewBox];
-	//NSLog(@"7");
-	lNewBox.statusMessageString = [aStatusInfo objectForKey:@"text"];
+	if (!aIsRetweet) {
+		//NSLog(@"6");
+		lNewBox.statusMessage = [PTStatusFormatter formatStatusMessage:[aStatusInfo objectForKey:@"text"] forBox:lNewBox];
+		//NSLog(@"7");
+		lNewBox.statusMessageString = [aStatusInfo objectForKey:@"text"];
+	} else {
+		//NSLog(@"6");
+		lNewBox.statusMessage = [PTStatusFormatter formatStatusMessage:
+									 [NSString stringWithFormat:@"RT @%@: %@", 
+										[[[aStatusInfo objectForKey:@"retweeted_status"] objectForKey:@"user"] objectForKey:@"screen_name"], 
+									  [[aStatusInfo objectForKey:@"retweeted_status"] objectForKey:@"text"]] 
+								forBox:lNewBox];
+		//NSLog(@"7");
+		lNewBox.statusMessageString = [[aStatusInfo objectForKey:@"retweeted_status"] objectForKey:@"text"];
+	}
 	//NSLog(@"8");
 	lNewBox.userImage = [fMainController requestUserImage:[[aStatusInfo objectForKey:@"user"] objectForKey:@"profile_image_url"]
 												   forBox:lNewBox];
@@ -89,6 +100,7 @@
 
 	
 	if (lNewBox.sType == RetweetMessage) {
+		NSLog(@"%@", aStatusInfo);
 		lNewBox.retweetId = [[NSDecimalNumber decimalNumberWithString:[[aStatusInfo objectForKey:@"retweeted_status"] valueForKeyPath:@"id"]] unsignedLongLongValue];
 		lNewBox.retweetUserId = [[[aStatusInfo objectForKey:@"retweeted_status"] objectForKey:@"user"] objectForKey:@"screen_name"];
 	} else {

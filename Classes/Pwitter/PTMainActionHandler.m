@@ -78,7 +78,7 @@
 }
 
 - (IBAction)closeAuthSheet:(id)sender
-{
+{	
 	[[PTPreferenceManager sharedSingleton] setUserName:[fAuthUserName stringValue] 
 										  password:[fAuthPassword stringValue]];
     [NSApp endSheet:fAuthPanel];
@@ -255,7 +255,7 @@
 - (void)retweetStatus:(PTStatusBox *)aBox {
 	if (aBox.sType == ErrorMessage || aBox.sType == DirectMessage) return;
 	NSString *lUserId = (aBox.sType==RetweetMessage?aBox.retweetUserId:aBox.userId);
-	NSString *lMessage = (aBox.sType==RetweetMessage?aBox.originalStatus:[aBox.statusMessage string]);
+	NSString *lMessage = (aBox.sType==RetweetMessage?aBox.statusMessageString:[aBox.statusMessage string]);
 	NSString *lMessageTarget = [NSString stringWithFormat:@"RT @%@ %@", lUserId, lMessage];
 	[fMainWindow makeFirstResponder:fStatusUpdateField];
 	[fStatusUpdateField setStringValue:lMessageTarget];

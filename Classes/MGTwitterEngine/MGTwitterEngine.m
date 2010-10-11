@@ -1312,8 +1312,8 @@
 - (NSString *)getRepliesSinceID:(MGTwitterEngineID)sinceID withMaximumID:(MGTwitterEngineID)maxID startingAtPage:(int)page count:(int)count
 {
 // NOTE: identi.ca can't handle mentions URL yet...
-//	NSString *path = [NSString stringWithFormat:@"statuses/mentions.%@", API_FORMAT];
-	NSString *path = [NSString stringWithFormat:@"statuses/replies.%@", API_FORMAT];
+	NSString *path = [NSString stringWithFormat:@"statuses/mentions.%@", API_FORMAT];
+//	NSString *path = [NSString stringWithFormat:@"statuses/replies.%@", API_FORMAT];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (sinceID > 0) {

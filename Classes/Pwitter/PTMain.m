@@ -192,20 +192,34 @@
 						forKey:[fTwitterEngine getRepliesSinceID:fLastReplyID startingAtPage:0 count:100]];
 }
 
-- (void)setUpTwitterEngine {
-	fTwitterEngine = [[MGTwitterEngine alloc] initWithDelegate:self];
-	[fTwitterEngine setUsesSecureConnection:[[PTPreferenceManager sharedSingleton] apiSecure]];
-	[fTwitterEngine setAPIDomain:[[PTPreferenceManager sharedSingleton] apiUrl]];
-	[fTwitterEngine setClientName:@"Pwitter" 
-						  version:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
-							  URL:@"http://github.com/freeatnet/pwitter/wikis/home" 
-							token:@"pwitter"];
-	[fTwitterEngine setUsername:[[PTPreferenceManager sharedSingleton] userName] 
-					   password:[[PTPreferenceManager sharedSingleton] password]];
+- (void)beginUpdates {
 	[self loadUnread];
 	[self runInitialUpdates];
 	[self setupUpdateTimer];
 	[self setupMessageUpdateTimer];
+}
+
+- (void)setUpTwitterEngine {
+	fTwitterEngine = [[MGTwitterEngine alloc] initWithDelegate:self];
+	[fTwitterEngine setAPIDomain:[[PTPreferenceManager sharedSingleton] apiUrl]];
+	[fTwitterEngine setUsesSecureConnection:[[PTPreferenceManager sharedSingleton] apiSecure]];
+
+	[fTwitterEngine setConsumerKey:TWITTER_OAUTH_TOKEN secret:TWITTER_OAUTH_SECRET];
+	/*[fTwitterEngine setClientName:@"Pwitter" 
+						  version:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
+							  URL:@"http://github.com/freeatnet/pwitter/wikis/home" 
+							token:@"pwitterF"];*/
+	
+	if ([[PTPreferenceManager sharedSingleton] accessToken] != nil) {
+		OAToken *token = [[OAToken alloc] initWithKey:[[PTPreferenceManager sharedSingleton] accessToken]
+											   secret:[[PTPreferenceManager sharedSingleton] accessSecret]];
+		
+		[fTwitterEngine setAccessToken:token];
+		[self beginUpdates];
+	} else {
+		[fTwitterEngine getXAuthAccessTokenForUsername:[[PTPreferenceManager sharedSingleton] userName]
+											  password:[[PTPreferenceManager sharedSingleton] password]];
+	}
 }
 
 - (void)initTransaction {
@@ -239,18 +253,16 @@
 	[[fStatusController content] removeAllObjects];
 	[fStatusController rearrangeObjects];
 	[fStatusRecord removeAllObjects];
-	[fTwitterEngine setUsername:[[PTPreferenceManager sharedSingleton] userName] 
-					   password:[[PTPreferenceManager sharedSingleton] password]];
-	[self setupUpdateTimer];
-	[self setupMessageUpdateTimer];
 	[fTwitterEngine closeAllConnections];
-	[self deallocTransaction];
-	[self initTransaction];
 	[fProgressBar stopAnimation:self];
 	[fProgressBar setHidden:YES];
 	[fUpdateButton setEnabled:YES];
-	[self loadUnread];
-	[self runInitialUpdates];
+	[self deallocTransaction];
+	[[PTPreferenceManager sharedSingleton] setAccessToken:@"" withSecret:@""];
+	
+	[self initTransaction];
+	[fTwitterEngine getXAuthAccessTokenForUsername:[[PTPreferenceManager sharedSingleton] userName]
+										  password:[[PTPreferenceManager sharedSingleton] password]];
 }
 
 - (IBAction)activateApp:(id)sender {
@@ -382,7 +394,7 @@
 		unsigned long long tweetID = [[NSDecimalNumber decimalNumberWithString:[lCurrentStatus valueForKeyPath:@"id"]] unsignedLongLongValue];
 		if (![fStatusRecord containsObject:[NSNumber numberWithLongLong:tweetID]]) {
 			int lDecision = 0;
-			if ([[lCurrentStatus objectForKey:@"in_reply_to_screen_name"] isEqualToString:[fTwitterEngine username]]) {
+			if ([[lCurrentStatus objectForKey:@"in_reply_to_screen_name"] isEqualToString:[[PTPreferenceManager sharedSingleton] userName]]) {
 				if (lUpdateType == @"REPLY_UPDATE" || 
 					lUpdateType == @"INIT_REPLY_UPDATE" || 
 					lUpdateType == @"POST" ||
@@ -508,6 +520,13 @@
 	}
 }
 
+- (void)accessTokenReceived:(OAToken *)aToken forRequest:(NSString *)aIdentifier {
+	[[PTPreferenceManager sharedSingleton] setAccessToken:[aToken key] withSecret:[aToken secret]];
+	[[PTPreferenceManager sharedSingleton] clearPassword];
+	[fTwitterEngine setAccessToken:aToken];
+	[self beginUpdates];
+}
+
 - (IBAction)updateTimeline:(id)sender {
 	// sender is self when this method is provoked by the timer
 	if (sender != self) {
@@ -590,7 +609,6 @@
 							forKey:[fTwitterEngine sendUpdate:aMessage 
 													inReplyTo:fReplyUpdateId]];
 	} else if (fRetweetUpdateId > 0) {
-		NSLog(@"Retweet action on %qu", fRetweetUpdateId);
 		[fRequestDetails setObject:@"POST" 
 							forKey:[fTwitterEngine sendRetweet:fRetweetUpdateId]];
 	} else {
@@ -647,7 +665,7 @@
 	{
 		[lFileManager createDirectoryAtPath: lFolder attributes: nil];
 	}
-	NSString *lFileName = [[fTwitterEngine username] stringByAppendingString:@".unread"];
+	NSString *lFileName = [[[PTPreferenceManager sharedSingleton] userName] stringByAppendingString:@".unread"];
 	return [lFolder stringByAppendingPathComponent: lFileName];
 }
 
