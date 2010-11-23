@@ -6,6 +6,18 @@
       <description>Most recent changes with links to updates.</description>
       <language>en</language>
 		<item>
+			<title>Version 2.0.2</title>
+			<sparkle:releaseNotesLink>http://freeatnet.github.com/pwitter/SparkleData/rnotes.html#version-2.0.2</sparkle:releaseNotesLink>
+			<pubDate>Tue, 23 Nov 2010 17:34:53 -0500</pubDate>
+			<enclosure
+				url="http://freeatnet.github.com/pwitter/SparkleUpdates/Pwitter 2.0.2.zip"
+				sparkle:version="2.0.2"
+				type="application/octet-stream"
+				length="1352649"
+				sparkle:dsaSignature="MC0CFQCyZ7dNgEz4Y0a0grJn7AyWR6wnugIUII1xKGlIhMUeZu5Q9rqWKGo6PTA="
+			/>
+		</item>
+		<item>
 			<title>Version 2.0.1</title>
 			<sparkle:releaseNotesLink>http://freeatnet.github.com/pwitter/SparkleData/rnotes.html#version-2.0.1</sparkle:releaseNotesLink>
 			<pubDate>Mon, 11 Oct 2010 05:23:27 -0400</pubDate>
